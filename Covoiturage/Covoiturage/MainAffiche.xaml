@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="Covoiturage.MainAffiche"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Covoiturage"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="Azure">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" >
+            <GridView x:Name="lvTraj" SelectionChanged="lvTraj_SelectionChanged">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Trajet">
+                        <StackPanel Orientation="Horizontal"   HorizontalAlignment="Stretch" Background="Gray">
+                            <StackPanel>
+                                <Image Source="{x:Bind couverture}"  HorizontalAlignment="Left" Width="200" Height="400"/>
+                            </StackPanel>
+
+                            <StackPanel Width="100">
+                                <TextBlock Text="{x:Bind titre}" Margin="5,5,5,10"/>
+                                <TextBlock Text="{x:Bind auteur}" Margin="5,5,5,10"/>
+                                <TextBlock Text="{x:Bind editeur}" Margin="5,5,5,10"/>
+                            </StackPanel>
+
+
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </StackPanel>
+
+    </Grid>
+</Page>

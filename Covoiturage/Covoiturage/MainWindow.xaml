@@ -1,0 +1,29 @@
+﻿<Window
+    x:Class="Covoiturage.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Covoiturage"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <NavigationView PaneDisplayMode="Left" Background="Gainsboro" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" SelectionChanged="NavigationView_SelectionChanged">
+
+        <NavigationView.Header>
+            <TextBlock x:Name="tblHeader" Text="En tete"/>
+        </NavigationView.Header>
+
+        <NavigationView.MenuItems>
+            <NavigationViewItemHeader Content="Zone 1"  Foreground="Firebrick"/>
+            <NavigationViewItem Content="Trajet" Icon="Flag" Tag="Trajet"  Foreground="Firebrick" />
+            <NavigationViewItem Content="Agenda" Icon="Calendar"  Foreground="Firebrick"/>
+            <NavigationViewItemSeparator/>
+            <NavigationViewItemHeader Content="Zone 2"  Foreground="Firebrick"/>
+            <NavigationViewItem Content="Commandes" Icon="Shop"  Foreground="Firebrick"/>
+            <NavigationViewItem Content="Jeux Video" Icon="Keyboard"  Foreground="Firebrick"/>
+        </NavigationView.MenuItems>
+
+        <Frame x:Name="mainFrame"/>
+
+    </NavigationView>
+</Window>

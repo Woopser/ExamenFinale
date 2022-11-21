@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Covoiturage (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Covoiturage (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
