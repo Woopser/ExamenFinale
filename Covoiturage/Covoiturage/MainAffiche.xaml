@@ -24,9 +24,9 @@
                             </StackPanel>
 
                             <StackPanel Width="100">
-                                <TextBlock Text="{x:Bind titre}" Margin="5,5,5,10"/>
-                                <TextBlock Text="{x:Bind auteur}" Margin="5,5,5,10"/>
-                                <TextBlock Text="{x:Bind editeur}" Margin="5,5,5,10"/>
+                                <TextBlock Text="{x:Bind VilleDep}" Margin="5,5,5,10"/>
+                                <TextBlock Text="{x:Bind VilleArr}" Margin="5,5,5,10"/>
+                                <TextBlock Text="{x:Bind id_chauffeur}" Margin="5,5,5,10"/>
                             </StackPanel>
 
 

@@ -16,11 +16,12 @@
         <NavigationView.MenuItems>
             <NavigationViewItemHeader Content="Zone 1"  Foreground="Firebrick"/>
             <NavigationViewItem Content="Trajet" Icon="Flag" Tag="Trajet"  Foreground="Firebrick" />
-            <NavigationViewItem Content="Agenda" Icon="Calendar"  Foreground="Firebrick"/>
+            <!--<NavigationViewItem Content="Agenda" Icon="Calendar"  Foreground="Firebrick"/>
             <NavigationViewItemSeparator/>
             <NavigationViewItemHeader Content="Zone 2"  Foreground="Firebrick"/>
             <NavigationViewItem Content="Commandes" Icon="Shop"  Foreground="Firebrick"/>
             <NavigationViewItem Content="Jeux Video" Icon="Keyboard"  Foreground="Firebrick"/>
+            A AJOUTER QUAND ON VA AJOUTER PLUS DE FONCTIONNALITÉ-->
         </NavigationView.MenuItems>
 
         <Frame x:Name="mainFrame"/>

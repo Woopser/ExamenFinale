@@ -26,11 +26,12 @@ namespace Covoiturage
         public MainAffiche()
         {
             this.InitializeComponent();
+            lvTraj.ItemsSource = GestionBD.getInstance().getTrajet();
         }
 
         private void lvTraj_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            //Pour afficher les details d'un trajet
         }
     }
 }
