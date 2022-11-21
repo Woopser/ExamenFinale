@@ -70,3 +70,8 @@ CREATE TABLE Journee(
     FOREIGN KEY (id_facture) references Facture(id_facture)
 );
 
+INSERT INTO compte (type_compte, nom_utilisateur, password) VALUES ('chauffeur', '123', '123');
+
+INSERT INTO chauffeur ( id_compte, prenom, nom, adresse, no_telephone, email, ville_dep, ville_arr, voiture) VALUES (2, 'Jean', 'Lamotte', '123 Fausse Rue', '819-420-8008', 'Jean@jeamail.jean', 'Maskinongé' , 'Louiseville', 'SUV' );
+
+INSERT INTO  trajet (id_chauffeur, place_disp, ville_dep, ville_arr, heureDep, heureArr) VALUES (2, 5, 'Maskinonge' , 'Louisville', '12:00', '15:00' );
