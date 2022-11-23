@@ -15,8 +15,6 @@ CREATE TABLE Chauffeur(
     adresse VARCHAR(50),
     no_telephone varchar(14),
     email VARCHAR(20),
-    ville_dep VARCHAR(20),
-    ville_arr VARCHAR(20),
     voiture VARCHAR(10),
     FOREIGN KEY (id_compte) references Compte(id_compte)
 );
@@ -27,31 +25,31 @@ CREATE TABLE Trajet(
     place_disp int,
     ville_dep VARCHAR(20),
     ville_arr VARCHAR(20),
-    heureDep VARCHAR(5),
-    heureArr VARCHAR(5),
+    heureDep int,
+    heureArr int,
     FOREIGN KEY (id_chauffeur) references Chauffeur(id_chauffeur)
 );
 
 CREATE TABLE Client(
     id_client int PRIMARY KEY AUTO_INCREMENT,
     id_compte int,
-    id_trajet int,
     prenom VARCHAR(20),
     nom VARCHAR(20),
     adresse varchar(50),
     no_telephone VARCHAR(14),
     ville_dep VARCHAR(20),
     ville_arr VARCHAR(20),
-    FOREIGN KEY (id_compte) references Compte(id_compte),
-    FOREIGN KEY (id_trajet) references  Trajet(id_trajet)
+    FOREIGN KEY (id_compte) references Compte(id_compte)
 );
 
 CREATE TABLE Arret(
     id_arret int PRIMARY KEY AUTO_INCREMENT,
     id_trajet int,
+    id_client int,
     ville VARCHAR(20),
-    heureArr VARCHAR(5),
-    FOREIGN KEY (id_trajet) references Trajet(id_trajet)
+    heureArr int,
+    FOREIGN KEY (id_trajet) references Trajet(id_trajet),
+    FOREIGN KEY (id_client) references Client(id_client)
 );
 
 CREATE TABLE Facture(
@@ -61,7 +59,7 @@ CREATE TABLE Facture(
     FOREIGN KEY (id_trajet) references Trajet(id_trajet)
 );
 
-CREATE TABLE Journee(
+CREATE TABLE Session(
     id_journee int PRIMARY KEY AUTO_INCREMENT,
     id_facture int,
     total double,
@@ -70,8 +68,21 @@ CREATE TABLE Journee(
     FOREIGN KEY (id_facture) references Facture(id_facture)
 );
 
-INSERT INTO compte (type_compte, nom_utilisateur, password) VALUES ('chauffeur', '123', '123');
+INSERT INTO Compte ( type_compte, nom_utilisateur, password) VALUES ('Client','Jean','Jean');
 
-INSERT INTO chauffeur ( id_compte, prenom, nom, adresse, no_telephone, email, ville_dep, ville_arr, voiture) VALUES (2, 'Jean', 'Lamotte', '123 Fausse Rue', '819-420-8008', 'Jean@jeamail.jean', 'Maskinongé' , 'Louiseville', 'SUV' );
+INSERT INTO Compte ( type_compte, nom_utilisateur, password) VALUES ('Client', 'Paul', 'Paul' );
 
-INSERT INTO  trajet (id_chauffeur, place_disp, ville_dep, ville_arr, heureDep, heureArr) VALUES (2, 5, 'Maskinonge' , 'Louisville', '12:00', '15:00' );
+INSERT INTO Compte ( type_compte, nom_utilisateur, password) VALUES ('Client', 'Joe', 'Joe');
+
+INSERT INTO Client ( id_compte, prenom, nom, adresse, no_telephone, ville_dep, ville_arr) VALUES (1, 'Jean', 'LaJeance' ,'123 Fausse Rue', '819-420-8008', 'Maskinonge', 'Louiseville');
+INSERT INTO Client ( id_compte, prenom, nom, adresse, no_telephone, ville_dep, ville_arr) VALUES (2, 'Paul', 'Paulisson', '456 Fond de Rivieres', '819-999-8888','Trois-Rivieres', 'La Tuque');
+INSERT INTO Client ( id_compte, prenom, nom, adresse, no_telephone, ville_dep, ville_arr) VALUES (3, 'Joe', 'Jonisson', '789 LaForet' , '819-123-4567', 'Maskinonge', 'Mekinac');
+
+
+/*Triggers
+  1 creation de facture 
+  2 update la session 
+  3 Update trajet pour place disponible quand ajout d'arret
+  4 update Nom mais on verra si on a besoin de autre chose
+  */
+  
