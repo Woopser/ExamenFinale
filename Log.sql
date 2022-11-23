@@ -101,3 +101,20 @@ CREATE TRIGGER Sesh
         UPDATE Session SET part_conducteur = (NEW.montant * 0.3) + Session.part_conducteur;
         /*UPDATE session Set total = */
     end //
+    
+    INSERT INTO compte(type_compte, nom_utilisateur, password) VALUES ('Admin', 'root', 'root');
+
+INSERT INTO compte(type_compte, nom_utilisateur, password) VALUES ('Chauffeur', 'Thomas', 'Thomas');
+INSERT INTO compte(type_compte, nom_utilisateur, password) VALUES ('Chauffeur', 'Alex', 'Alex');
+
+INSERT INTO chauffeur(id_compte, prenom, nom, adresse, no_telephone, email, voiture) VALUES (5, 'Thomas', 'Desruisseaux', '123 rue street', '819-459-6528', 'thom.des@hotmail.com', 'VUS');
+INSERT INTO chauffeur(id_compte, prenom, nom, adresse, no_telephone, email, voiture) VALUES (6, 'Alex', 'Carle', '456 rue street', '819-184-6926', 'alex.car@hotmail.com', 'Berline');
+
+DELIMITER //
+    CREATE TRIGGER trigger_place_dispo
+        AFTER INSERT ON arret
+        FOR EACH ROW
+        BEGIN
+            UPDATE trajet SET place_disp = place_disp + 1 WHERE NEW.id_trajet LIKE trajet.id_trajet;
+        END
+// DELIMITER ;
