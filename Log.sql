@@ -85,4 +85,19 @@ INSERT INTO Client ( id_compte, prenom, nom, adresse, no_telephone, ville_dep, v
   3 Update trajet pour place disponible quand ajout d'arret
   4 update Nom mais on verra si on a besoin de autre chose
   */
-  
+  DELIMITER //
+CREATE TRIGGER facturation
+    AFTER INSERT ON Trajet
+    FOR EACH ROW
+    BEGIN
+        INSERT INTO Facture ( id_trajet, montant) VALUES (NEW.id_trajet, (SELECT place_disp FROM Trajet WHERE id_trajet = NEW.id_trajet) * 30);
+    end //
+
+DELIMITER //
+CREATE TRIGGER Sesh
+    AFTER INSERT ON Facture
+    FOR EACH ROW
+    BEGIN
+        UPDATE Session SET part_conducteur = (NEW.montant * 0.3) + Session.part_conducteur;
+        /*UPDATE session Set total = */
+    end //
