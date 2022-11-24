@@ -99,7 +99,8 @@ CREATE TRIGGER Sesh
     FOR EACH ROW
     BEGIN
         UPDATE Session SET part_conducteur = (NEW.montant * 0.3) + Session.part_conducteur;
-        /*UPDATE session Set total = */
+        UPDATE session Set total = total + NEW.montant;
+        UPDATE Session SET profit = total - (NEW.montant * 0.3);
     end //
     
     INSERT INTO compte(type_compte, nom_utilisateur, password) VALUES ('Admin', 'root', 'root');
