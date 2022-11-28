@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="Azure">
+    <Grid Background="LightSkyBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -19,14 +19,15 @@
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="local:Trajet">
                         <StackPanel Orientation="Horizontal"   HorizontalAlignment="Stretch" Background="Gray">
-                            <StackPanel>
-                                <Image Source="{x:Bind couverture}"  HorizontalAlignment="Left" Width="200" Height="400"/>
-                            </StackPanel>
+                            
 
                             <StackPanel Width="100">
                                 <TextBlock Text="{x:Bind VilleDep}" Margin="5,5,5,10"/>
                                 <TextBlock Text="{x:Bind VilleArr}" Margin="5,5,5,10"/>
-                                <TextBlock Text="{x:Bind id_chauffeur}" Margin="5,5,5,10"/>
+                                <TextBlock Text="{x:Bind Id_chauffeur}" Margin="5,5,5,10"/>
+                                <TextBlock Text="{x:Bind HeureArr}" Margin="5,5,5,10"/>
+                                <TextBlock Text="{x:Bind HeureDep}" Margin="5,5,5,10"/>
+                                <TextBlock Text="{x:Bind PlaceDisp}" Margin="5,5,5,10"/>
                             </StackPanel>
 
 

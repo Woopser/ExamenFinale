@@ -43,8 +43,8 @@ namespace Covoiturage
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
-                    HeureDep = r.GetString("heureDep"),
-                    HeureArr = r.GetString("heureArr")
+                    HeureDep = r.GetInt32("heureDep"),
+                    HeureArr = r.GetInt32("heureArr")
                 };
                 liste.Add(t);
             }
