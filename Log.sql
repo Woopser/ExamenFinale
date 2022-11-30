@@ -27,6 +27,8 @@ CREATE TABLE Trajet(
     ville_arr VARCHAR(20),
     heureDep int,
     heureArr int,
+    journee date,
+    estFini bool,
     FOREIGN KEY (id_chauffeur) references Chauffeur(id_chauffeur)
 );
 
@@ -36,6 +38,7 @@ CREATE TABLE Client(
     prenom VARCHAR(20),
     nom VARCHAR(20),
     adresse varchar(50),
+    email varchar(50),
     no_telephone VARCHAR(14),
     ville_dep VARCHAR(20),
     ville_arr VARCHAR(20),
@@ -148,9 +151,9 @@ CREATE VIEW chauffeurs_view AS
     SELECT * FROM chauffeur;
     
 DELIMITER //
-CREATE PROCEDURE ajout_client(IN id_com INT, IN prenom1 VARCHAR(20), IN nom1 VARCHAR(20), IN adresse1 VARCHAR(50), IN notel VARCHAR(14), IN villeDep VARCHAR(20), IN villeArr VARCHAR(20))
+CREATE PROCEDURE ajout_client(IN id_com INT, IN prenom1 VARCHAR(20), IN nom1 VARCHAR(20), IN adresse1 VARCHAR(50), IN notel VARCHAR(14), IN villeDep VARCHAR(20), IN villeArr VARCHAR(20), IN email1 VARCHAR(20))
 BEGIN
-    INSERT INTO Client ( id_compte, prenom, nom, adresse, no_telephone, ville_dep, ville_arr) VALUES (id_com,prenom1,nom1,adresse1,notel,villeDep,villeArr);
+    INSERT INTO Client ( id_compte, prenom, nom,email, adresse, no_telephone, ville_dep, ville_arr) VALUES (id_com,prenom1,nom1,email1,adresse1,notel,villeDep,villeArr);
 end //
 
 DELIMITER //
@@ -166,9 +169,9 @@ BEGIN
 end //
 
 DELIMITER //
-CREATE PROCEDURE ajout_trajet(IN idchauf INT, IN place INT, IN villeD VARCHAR(20),IN villeA VARCHAR(20), IN heureD INT, IN heureA INT)
+CREATE PROCEDURE ajout_trajet(IN idchauf INT, IN place INT, IN villeD VARCHAR(20),IN villeA VARCHAR(20), IN heureD INT, IN heureA INT, IN heur date, IN bully bool)
 BEGIN
-    INSERT INTO Trajet (id_chauffeur, place_disp, ville_dep, ville_arr, heureDep, heureArr) VALUES (idchauf,place,villeD,villeA,heureD,heureA);
+    INSERT INTO Trajet (id_chauffeur, place_disp, ville_dep, ville_arr, heureDep, heureArr,journee,estFini) VALUES (idchauf,place,villeD,villeA,heureD,heureA,heur,bully);
 end //
 
 
