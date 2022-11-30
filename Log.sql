@@ -119,3 +119,30 @@ DELIMITER //
             UPDATE trajet SET place_disp = place_disp + 1 WHERE NEW.id_trajet LIKE trajet.id_trajet;
         END
 // DELIMITER ;
+
+DELIMITER  //
+    CREATE TRIGGER trigger_session
+        AFTER INSERT ON facture
+        FOR EACH ROW
+        BEGIN
+           UPDATE session SET total = total + new.montant;
+           UPDATE session SET profit = profit + 0.25 * new.montant;
+           UPDATE session SET part_conducteur = part_conducteur + 0.25 * new.montant;
+        END
+// DELIMITER ;
+
+INSERT INTO session (total, profit, part_conducteur) VALUES (0, 0, 0);
+INSERT INTO facture (id_trajet, montant) VALUES (1, 200) ;
+INSERT INTO facture (id_trajet, montant) VALUES (1, 400) ;
+
+CREATE VIEW session_view AS
+    SELECT * FROM session;
+
+CREATE VIEW facture_view AS
+    SELECT * FROM facture;
+
+CREATE VIEW clients_view AS
+    SELECT * FROM client;
+
+CREATE VIEW chauffeurs_view AS
+    SELECT * FROM chauffeur;
