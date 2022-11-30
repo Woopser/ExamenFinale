@@ -8,7 +8,7 @@ namespace Covoiturage
 {
     internal class Trajet
     {
-        int id;
+        int id_trajet;
         int id_chauffeur;
         int placeDisp;
         string villeDep;
@@ -16,7 +16,7 @@ namespace Covoiturage
         int heureDep;
         int heureArr;
 
-        public int Id { get => id; set => id = value; }
+        public int Id_trajet { get => id_trajet; set => id_trajet = value; }
         public int Id_chauffeur { get => id_chauffeur; set => id_chauffeur = value; }
 
         public int PlaceDisp { get => placeDisp; set => placeDisp = value; }

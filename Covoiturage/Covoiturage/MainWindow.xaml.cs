@@ -30,18 +30,15 @@ namespace Covoiturage
         MySqlConnection con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2022_420326ri_eq4;Uid=2046711;Pwd=2046711");
         ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
 
-        
-
         public MainWindow()
         {
             this.InitializeComponent();
-            mainFrame.Navigate(typeof(MainAffiche));
+            mainFrame.Navigate(typeof(login));
         }
 
         private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             var item = (NavigationViewItem)args.SelectedItem;
-            tblHeader.Text = item.Content.ToString();
 
             switch (item.Content)
             {

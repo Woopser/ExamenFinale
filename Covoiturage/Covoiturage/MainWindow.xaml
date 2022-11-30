@@ -9,13 +9,16 @@
 
     <NavigationView PaneDisplayMode="Left" Background="Gainsboro" IsBackButtonVisible="Collapsed" IsSettingsVisible="False" SelectionChanged="NavigationView_SelectionChanged">
 
-        <NavigationView.Header>
-            <TextBlock x:Name="tblHeader" Text="En tete"/>
-        </NavigationView.Header>
-
         <NavigationView.MenuItems>
-            <NavigationViewItemHeader Content="Zone 1"  Foreground="Firebrick"/>
-            <NavigationViewItem Content="Trajet" Icon="Flag" Tag="Trajet"  Foreground="Firebrick" />
+            <NavigationViewItemHeader Content="Uber Go"  Foreground="Firebrick"/>
+            
+            <NavigationViewItemSeparator />
+            
+            <NavigationViewItem Content="Trajet" Icon="Flag" Tag="Trajets"  Foreground="Firebrick" />
+            
+            <NavigationViewItemSeparator />
+
+            <NavigationViewItem Content="Trajet" Icon="Flag" Tag="Trajets"  Foreground="Firebrick" />
             <!--<NavigationViewItem Content="Agenda" Icon="Calendar"  Foreground="Firebrick"/>Bolbofjfgjg
             <NavigationViewItemSeparator/>
             <NavigationViewItemHeader Content="Zone 2"  Foreground="Firebrick"/>

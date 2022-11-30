@@ -8,7 +8,7 @@ namespace Covoiturage
 {
     internal class Client
     {
-        int id;
+        int id_client;
         int id_compte;
         string prenom;
         string nom;
@@ -17,7 +17,7 @@ namespace Covoiturage
         string villeDep;
         string villeArr;
 
-        public int Id { get => id; set => id = value; }
+        public int Id_client { get => id_client; set => id_client = value; }
         public int Id_compte { get => id_compte; set => id_compte = value; }
         public string Prenom { get => prenom; set => prenom = value; }
         public string Nom { get => nom; set => nom = value; }

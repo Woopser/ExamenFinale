@@ -40,7 +40,7 @@ namespace Covoiturage
             {
                 Trajet t = new Trajet()
                 {
-                    Id = r.GetInt32("id"),
+                    Id_trajet = r.GetInt32("id_trajet"),
                     Id_chauffeur = r.GetInt32("id_chauffeur"),
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
@@ -56,9 +56,9 @@ namespace Covoiturage
         }
 
         //Pour aller chercher la liste des clients
-        public ObservableCollection<Trajet> getClients()
+        public ObservableCollection<Client> getClients()
         {
-            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
+            ObservableCollection<Client> liste = new ObservableCollection<Client>();
             MySqlCommand commande = new MySqlCommand();
             commande.Connection = con;
             commande.CommandText = "Select * from client";
@@ -69,7 +69,7 @@ namespace Covoiturage
             {
                 Client c = new Client()
                 {
-                    Id = r.GetInt32("id"),
+                    Id_client = r.GetInt32("id_client"),
                     Id_compte = r.GetInt32("id_compte"),
                     Prenom = r.GetString("prenom"),
                     Adresse = r.GetString("adresse"),

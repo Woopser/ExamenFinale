@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="Covoiturage.login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Covoiturage"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+        <TextBlock Text="Connexion" FontSize="25" Margin="0,50,0,50" HorizontalAlignment="Center"/>
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Nom d'utilisateur" Margin="0,0,10,0" />
+            <TextBox x:Name="tbUser" Width="200" HorizontalAlignment="Right" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+            <TextBlock Text="Mot de passe" Margin="0,0,10,0" />
+            <TextBox x:Name="tbMdp"  Width="200" HorizontalAlignment="Right" Margin="33,0,0,0"/>
+        </StackPanel>
+
+        <Button x:Name="btnLogin" Content="Connecter" Background="Firebrick" Foreground="White" HorizontalAlignment="Right"/>
+
+        <TextBlock Text="Créé vous un compte">
+             <Hyperlink Click="Hyperlink_Click"/>
+        </TextBlock>
+    </StackPanel>
+</Page>
