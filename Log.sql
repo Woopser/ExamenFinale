@@ -27,6 +27,8 @@ CREATE TABLE Trajet(
     ville_arr VARCHAR(20),
     heureDep int,
     heureArr int,
+    journee date,
+    estFini bool,
     FOREIGN KEY (id_chauffeur) references Chauffeur(id_chauffeur)
 );
 
@@ -36,6 +38,7 @@ CREATE TABLE Client(
     prenom VARCHAR(20),
     nom VARCHAR(20),
     adresse varchar(50),
+    email varchar(50),
     no_telephone VARCHAR(14),
     ville_dep VARCHAR(20),
     ville_arr VARCHAR(20),
@@ -146,3 +149,59 @@ CREATE VIEW clients_view AS
 
 CREATE VIEW chauffeurs_view AS
     SELECT * FROM chauffeur;
+    
+DELIMITER //
+CREATE PROCEDURE ajout_client(IN id_com INT, IN prenom1 VARCHAR(20), IN nom1 VARCHAR(20), IN adresse1 VARCHAR(50), IN notel VARCHAR(14), IN villeDep VARCHAR(20), IN villeArr VARCHAR(20), IN email1 VARCHAR(20))
+BEGIN
+    INSERT INTO Client ( id_compte, prenom, nom,email, adresse, no_telephone, ville_dep, ville_arr) VALUES (id_com,prenom1,nom1,email1,adresse1,notel,villeDep,villeArr);
+end //
+
+DELIMITER //
+CREATE PROCEDURE ajout_chauffeur(IN id_com INT, IN prenom1 VARCHAR(20), IN nom1 VARCHAR(20), IN adresse1 VARCHAR(50), IN notel VARCHAR(14), IN email1 VARCHAR(20), IN voit VARCHAR(20))
+BEGIN
+    INSERT INTO Chauffeur ( id_compte, prenom, nom, adresse, no_telephone, email, voiture) VALUES (id_com,prenom1,nom1,adresse1,notel, email1,voit);
+end //
+
+DELIMITER //
+CREATE PROCEDURE ajout_arret(IN idtraj INT, IN idcli INT, IN vil VARCHAR(20), IN heure INT)
+BEGIN
+    INSERT INTO Arret ( id_trajet, id_client, ville, heureArr) VALUES (idtraj,idcli,vil,heure);
+end //
+
+DELIMITER //
+CREATE PROCEDURE ajout_trajet(IN idchauf INT, IN place INT, IN villeD VARCHAR(20),IN villeA VARCHAR(20), IN heureD INT, IN heureA INT, IN heur date, IN bully bool)
+BEGIN
+    INSERT INTO Trajet (id_chauffeur, place_disp, ville_dep, ville_arr, heureDep, heureArr,journee,estFini) VALUES (idchauf,place,villeD,villeA,heureD,heureA,heur,bully);
+end //
+
+
+/*Fonction stockés
+  1 Retourne le nombre de compte d'un type donner --FAIT
+  2 Retourne le nombre de trajet qui passe par une ville donner --FAIT
+  3 Retourne --FAIT
+  4 Retourne compter les factures pour un date donner A FAIRE
+ */
+
+DELIMITER //
+CREATE FUNCTION count_account(type VARCHAR(20)) RETURNS INT
+BEGIN
+    DECLARE nb INT;
+    SELECT count(*) INTO nb FROM Compte WHERE type_compte LIKE type;
+    RETURN nb;
+end //
+
+DELIMITER //
+CREATE FUNCTION villeDep_traj(ville VARCHAR(20)) RETURNS INT
+BEGIN
+    DECLARE nb INT;
+    SELECT count(*) INTO nb FROM Trajet WHERE ville_arr LIKE ville;
+    RETURN nb;
+end //
+
+DELIMITER //
+CREATE FUNCTION count_conduc(id int) returns INT
+BEGIN
+    DECLARE nb INT;
+    SELECT count(*) INTO nb FROM Trajet WHERE id_chauffeur LIKE id;
+    return nb;
+end //
