@@ -50,7 +50,7 @@ namespace Covoiturage
 
         private void CreerLog_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(CreationCompte));
+            Frame.Navigate(typeof(ChoixCompte));
         }
     }
 }

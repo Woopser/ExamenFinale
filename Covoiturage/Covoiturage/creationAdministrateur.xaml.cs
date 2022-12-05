@@ -27,5 +27,11 @@ namespace Covoiturage
         {
             this.InitializeComponent();
         }
+
+        private void btAjout_Click(object sender, RoutedEventArgs e)
+        {
+            GestionBD.getInstance().AjoutCompte(nomU.Text, Mdp.Text, "Administrateur");
+            Frame.Navigate(typeof(login));
+        }
     }
 }

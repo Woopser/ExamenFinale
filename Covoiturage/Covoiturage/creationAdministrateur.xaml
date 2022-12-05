@@ -8,7 +8,17 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="Aquamarine">
+    <StackPanel>
+        <StackPanel>
+            <TextBlock >Entrer un nom d'utilisateur</TextBlock>
+            <TextBox x:Name="nomU" />
+        </StackPanel>
+        <StackPanel>
+            <TextBlock >Entrer un mot de passe</TextBlock>
+            <TextBox x:Name="Mdp" />
+        </StackPanel>
 
-    </Grid>
+        <Button x:Name="btAjout" Click="btAjout_Click">Ajouter un administrateur</Button>
+
+    </StackPanel>
 </Page>

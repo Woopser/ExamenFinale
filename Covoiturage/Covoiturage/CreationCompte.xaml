@@ -18,13 +18,7 @@
             <TextBlock >Entrer un mot de passe</TextBlock>
             <TextBox x:Name="Mdp" />
         </StackPanel>
-        <StackPanel>
-            <ComboBox x:Name="typeU" Header="Declarer un type d'utilisateur" SelectionChanged="typeU_SelectionChanged">
-                <x:String>Administrateur</x:String>
-                <x:String>Chauffeur</x:String>
-                <x:String>Client</x:String>
-            </ComboBox>
-        </StackPanel>
+        
         <Button x:Name="btAjout" Click="btAjout_Click">Ajouter un utilisateur</Button>
 
 

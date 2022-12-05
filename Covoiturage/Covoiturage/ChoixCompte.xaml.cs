@@ -28,11 +28,22 @@ namespace Covoiturage
             this.InitializeComponent();
         }
 
-        string typawat = "creation";
+        
         private void typeU_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            typawat += typeU.SelectedItem.ToString();
-            Frame.Navigate(typeof(typawat));
+           string typawat = typeU.SelectedItem.ToString();
+           if(typawat == "Administrateur")
+            {
+                Frame.Navigate(typeof(creationAdministrateur));
+            }
+           else if(typawat == "Chauffeur")
+            {
+                Frame.Navigate(typeof(creationChauffeur));
+            }
+           else if(typawat == "Client")
+            {
+                Frame.Navigate (typeof(creationClient));
+            }
         }
     }
 }

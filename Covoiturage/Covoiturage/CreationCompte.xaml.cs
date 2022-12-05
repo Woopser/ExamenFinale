@@ -31,13 +31,8 @@ namespace Covoiturage
         string typeC = "";
         private void btAjout_Click(object sender, RoutedEventArgs e)
         {
-            GestionBD.getInstance().AjoutCompte(nomU.Text,Mdp.Text,typeC);
+            GestionBD.getInstance().AjoutCompte(nomU.Text,Mdp.Text,"Administrateur");
             Frame.Navigate(typeof(login));
-        }
-
-        private void typeU_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            typeC = typeU.SelectedItem.ToString();
         }
     }
 }

@@ -148,14 +148,15 @@ namespace Covoiturage
              }
             else
             {
-                return null;
+                
                 r.Close();
                 con.Close();
+                return null;
                 
             }
         }
 
-        //Creation d'un Compte (sa prends un nom d'utilisateur, un mot de passe, et un type de compte 
+        //Creation d'un administrateur (sa prends un nom d'utilisateur, un mot de passe, et un type de compte 
         //A METTRE DANS UN TRY/CATCH
         public void AjoutCompte(string nomU, string mdp, string typeC)
         {
@@ -172,6 +173,7 @@ namespace Covoiturage
             commande.ExecuteNonQuery();
             con.Close();
         }
+        //Ajouter un Chauffeur + Ajouter un clients a mettre ici
 
         //SUPPRIMER UN UTILISATEUR, PAS UTILISER MARCHE AVEC UN ID
         public void SuppCompte(int id)
