@@ -32,5 +32,25 @@ namespace Covoiturage
         {
             Frame.Navigate(typeof(CreationCompte));
         }
+
+        //Vérifie la connexion avec le singleton
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            Compte B = GestionBD.getInstance().verifConnect(tbMdp.Text, tbUser.Text);
+            if (B != null)
+            {
+                Logi.Text = "Reussite";
+            }
+            else
+            {
+                Logi.Text = "Échec de connexion";
+            };
+           
+        }
+
+        private void CreerLog_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(CreationCompte));
+        }
     }
 }

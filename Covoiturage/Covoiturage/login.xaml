@@ -19,12 +19,14 @@
         <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
             <TextBlock Text="Mot de passe" Margin="0,0,10,0" />
             <TextBox x:Name="tbMdp"  Width="200" HorizontalAlignment="Right" Margin="33,0,0,0"/>
+            <TextBlock x:Name="Logi"></TextBlock>
         </StackPanel>
 
-        <Button x:Name="btnLogin" Content="Connecter" Background="Firebrick" Foreground="White" HorizontalAlignment="Right"/>
+        <Button x:Name="btnLogin" Content="Connecter" Background="Firebrick" Foreground="White" HorizontalAlignment="Right" Click="btnLogin_Click"/>
 
-        <TextBlock Text="Créé vous un compte">
+        <!--<TextBlock Text="Créé vous un compte">
              <Hyperlink Click="Hyperlink_Click"/>
-        </TextBlock>
+        </TextBlock> Désoler mais il me fallait dequoi qui marchait 100%-->
+        <Button x:Name="CreerLog" Click="CreerLog_Click">Creer un Compte</Button>
     </StackPanel>
 </Page>
