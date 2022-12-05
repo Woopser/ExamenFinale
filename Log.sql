@@ -205,3 +205,10 @@ BEGIN
     SELECT count(*) INTO nb FROM Trajet WHERE id_chauffeur LIKE id;
     return nb;
 end //
+
+/*Test de choses plus insert dans trajet */
+SELECT * FRom compte WHERE nom_utilisateur LIKE 'Alex' AND password LIKE 'Thomas';
+
+insert into trajet (id_chauffeur, place_disp, ville_dep, ville_arr, heureDep, heureArr, journee, estFini) VALUES (2, 3, 'Maskinonge', 'Louiseville', 15, 16, 20221205 , false);
+
+SELECT * FROM trajet WHERE journee > 20221204 AND journee < 20221206;
