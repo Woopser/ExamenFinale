@@ -16,6 +16,16 @@ namespace Covoiturage
     {
         MySqlConnection con;
         static GestionBD gestionBD = null;
+        Compte utilisateur = null;
+        Client utilCli = null;
+        Chauffeur utilChauf = null;
+
+
+        internal Compte Utilisateur { get => utilisateur; set => utilisateur = value; }
+        internal Client UtilCli { get => utilCli; set => utilCli = value; }
+        internal Chauffeur UtilChauf { get => utilChauf; set => utilChauf = value; }
+
+
 
         public GestionBD()
         {
@@ -162,17 +172,31 @@ namespace Covoiturage
 
              if (r.Read())
              {
-                Compte c = new Compte()
+
+
+                utilisateur = new Compte()
                 {
                     Id_compte = r.GetInt32("id_compte"),
                     Type_compte = r.GetString("type_compte"),
                     Nom_utilisateur = r.GetString("nom_utilisateur"),
                     Password = r.GetString("password")
                 };
+
+                if(utilisateur.type_compte == "Client")
+                {
+                   UtilCli = getClientSeul(utilisateur.id_compte);
+                    return utilisateur;
+                }
+                else if(utilisateur.type_compte == "Chauffeur")
+                {
+                    utilChauf = getChauffeurSeul(utilisateur.id_compte);
+                    return utilisateur;
+                }
+
                 
                 r.Close();
                 con.Close();
-                return c;
+                return utilisateur;
                 
              }
             else
@@ -183,6 +207,79 @@ namespace Covoiturage
                 return null;
                 
             }
+        }
+
+        //Chercher un client par son id
+        public Client getClientSeul( int id)
+        {
+            ObservableCollection<Client> liste = new ObservableCollection<Client>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from client WHERE compte_id LIKE @id";
+
+            commande.Parameters.AddWithValue("@id", id);
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            if (r.Read())
+            {
+                Client c = new Client()
+                {
+                    Id_client = r.GetInt32("id_client"),
+                    Id_compte = r.GetInt32("id_compte"),
+                    Prenom = r.GetString("prenom"),
+                    Nom = r.GetString("nom"),
+                    Email = r.GetString("email"),
+                    Adresse = r.GetString("adresse"),
+                    Numero = r.GetString("no_telephone"),
+                    VilleDep = r.GetString("ville_dep"),
+                    VilleArr = r.GetString("ville_arr")
+                };
+                r.Close();
+                con.Close();
+                return c;
+            }
+            else
+            {
+                return null;
+            }
+            
+        }
+
+        //Chercher chauffeur par son id
+        public Chauffeur getChauffeurSeul(int id)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from chauffeur WHERE compte_id LIKE @id";
+
+            commande.Parameters.AddWithValue("@id", id);
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            if (r.Read())
+            {
+                Chauffeur c = new Chauffeur()
+                {
+                    id_chauffeur = r.GetInt32("id_client"),
+                    Id_compte = r.GetInt32("id_compte"),
+                    Prenom = r.GetString("prenom"),
+                    Nom = r.GetString("nom"),
+                    Email = r.GetString("email"),
+                    Adresse = r.GetString("adresse"),
+                    Numero = r.GetString("no_telephone"),
+                    Voiture = r.GetString("voiture"),
+                    
+                };
+                r.Close();
+                con.Close();
+                return c;
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
         //Creation d'un administrateur (sa prends un nom d'utilisateur, un mot de passe, et un type de compte 
