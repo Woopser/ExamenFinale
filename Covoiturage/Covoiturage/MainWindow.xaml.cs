@@ -29,6 +29,8 @@ namespace Covoiturage
 
         MySqlConnection con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2022_420326ri_eq4;Uid=2046711;Pwd=2046711");
         ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
+        ObservableCollection<string> ville = new ObservableCollection<string>(); //Ajouter une liste des villes prise en charge
+        
 
         public MainWindow()
         {
@@ -45,20 +47,8 @@ namespace Covoiturage
                 case "Trajet":
                     mainFrame.Navigate(typeof(MainAffiche));
                     break;
-                case "Demander un arrêt":
-                    mainFrame.Navigate(typeof(DemandeArret));
-                    break;
-                case "Ajouter un trajet":
-                    mainFrame.Navigate(typeof(AjoutTrajet));
-                    break;
-                case "AjouterArret":
-                    mainFrame.Navigate(typeof(AjoutArret));
-                    break;
-                case "Bilan de la journée":
-                    mainFrame.Navigate(typeof(VoirBilan));
-                    break;
-                case "Voir les factures":
-                    mainFrame.Navigate(typeof(VoirFactures));
+                case "Login":
+                    mainFrame.Navigate(typeof(login));
                     break;
                 default:
                     break;

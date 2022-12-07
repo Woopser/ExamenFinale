@@ -21,17 +21,21 @@ namespace Covoiturage
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CreationCompte : Page
+    public sealed partial class creationChauffeur : Page
     {
-        public CreationCompte()
+        public creationChauffeur()
         {
             this.InitializeComponent();
         }
 
-        string typeC = "";
-        private void btAjout_Click(object sender, RoutedEventArgs e)
+        private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            GestionBD.getInstance().AjoutCompte(nomU.Text,Mdp.Text,"Administrateur");
+            GestionBD.getInstance().AjoutCompte(nomU.Text, Mdp.Text, "Chauffeur");
+
+
+            int b = GestionBD.getInstance().GetIdCompte(nomU.Text);
+
+            GestionBD.getInstance().AjoutChauf(b, prenom.Text, nom.Text, adresse.Text, tele.Text, email.Text, voiture.Text);
             Frame.Navigate(typeof(login));
         }
     }

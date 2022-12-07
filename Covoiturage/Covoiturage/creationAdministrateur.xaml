@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Covoiturage.CreationCompte"
+    x:Class="Covoiturage.creationAdministrateur"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Covoiturage"
@@ -9,7 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel>
-
         <StackPanel>
             <TextBlock >Entrer un nom d'utilisateur</TextBlock>
             <TextBox x:Name="nomU" />
@@ -18,9 +17,8 @@
             <TextBlock >Entrer un mot de passe</TextBlock>
             <TextBox x:Name="Mdp" />
         </StackPanel>
-        
-        <Button x:Name="btAjout" Click="btAjout_Click">Ajouter un utilisateur</Button>
 
+        <Button x:Name="btAjout" Click="btAjout_Click">Ajouter un administrateur</Button>
 
     </StackPanel>
 </Page>

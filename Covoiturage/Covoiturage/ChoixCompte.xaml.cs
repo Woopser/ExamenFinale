@@ -21,18 +21,29 @@ namespace Covoiturage
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CreationCompte : Page
+    public sealed partial class ChoixCompte : Page
     {
-        public CreationCompte()
+        public ChoixCompte()
         {
             this.InitializeComponent();
         }
 
-        string typeC = "";
-        private void btAjout_Click(object sender, RoutedEventArgs e)
+        
+        private void typeU_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            GestionBD.getInstance().AjoutCompte(nomU.Text,Mdp.Text,"Administrateur");
-            Frame.Navigate(typeof(login));
+           string typawat = typeU.SelectedItem.ToString();
+           if(typawat == "Administrateur")
+            {
+                Frame.Navigate(typeof(creationAdministrateur));
+            }
+           else if(typawat == "Chauffeur")
+            {
+                Frame.Navigate(typeof(creationChauffeur));
+            }
+           else if(typawat == "Client")
+            {
+                Frame.Navigate (typeof(creationClient));
+            }
         }
     }
 }

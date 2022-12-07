@@ -26,7 +26,6 @@ namespace Covoiturage
         public login()
         {
             this.InitializeComponent();
-            lvLogin.ItemsSource = GestionBD.getInstance().getComptes();
         }
 
         private void Hyperlink_Click(Microsoft.UI.Xaml.Documents.Hyperlink sender, Microsoft.UI.Xaml.Documents.HyperlinkClickEventArgs args)
@@ -34,23 +33,39 @@ namespace Covoiturage
             Frame.Navigate(typeof(CreationCompte));
         }
 
+        //Vérifie la connexion avec le singleton
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            string login = tbMdp.Text + tbMdp.Text;
-
-            foreach (var item in lvLogin.Items)
+            Compte B = GestionBD.getInstance().verifConnect(tbMdp.Text, tbUser.Text);
+            if (B != null)
             {
-                if (Convert.ToString(item) == login)
+                string type = GestionBD.getInstance().GetTypeCompte(tbUser.Text);
+
+                if(type == "Administateur")
                 {
-                    tbErreur.Visibility = Visibility.Collapsed;
-
-                    Frame.Navigate(typeof(MainAffiche));
-
-                    break;
+                    //Frame.Navigate(typeof(/*ENTRER PAGE ICI*/));
                 }
-                else
-                    tbErreur.Visibility = Visibility.Visible;
+                else if(type == "Chauffeur")
+                {
+                    //Frame.Navigate(typeof(/*ENTRER PAGE ICI*/));
+                }
+                else if(type== "Client")
+                {
+                    //Trouver comment envoyer un objet de type client du client qui est login pis garder sa dans MainWindow + creer un objet "LoggedUser" pour garder les pistes du user qui est connecter IMPORTANT
+                    //DEVRAIT ETRE LA PROCHAINE ÉTAPE
+                    Frame.Navigate(typeof(MainAffiche));
+                }
             }
+            else
+            {
+                Logi.Text = "Échec de connexion";
+            };
+           
+        }
+
+        private void CreerLog_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(ChoixCompte));
         }
     }
 }

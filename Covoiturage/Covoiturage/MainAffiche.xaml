@@ -38,6 +38,11 @@
                             <TextBlock Text="Nombre de places disponibles:" />
                             <TextBlock Text="{x:Bind PlaceDisp}"  Margin="10,0,0,0"/>
                         </StackPanel>
+                        
+                        <!--Bout de code seulement pour clients-->
+                        <StackPanel Visibility="Collapsed" x:Name="BoutCli">
+                            <Button x:Name="arret" Click="arret_Click" Tag="{x:Bind Id_trajet}">M'inscrire au trajet</Button>
+                        </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

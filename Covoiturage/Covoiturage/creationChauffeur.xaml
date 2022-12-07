@@ -1,0 +1,58 @@
+﻿<Page
+    x:Class="Covoiturage.creationChauffeur"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Covoiturage"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel>
+
+        <StackPanel>
+            <TextBlock >Entrer un nom d'utilisateur</TextBlock>
+            <TextBox x:Name="nomU" />
+        </StackPanel>
+        <StackPanel>
+            <TextBlock >Entrer un mot de passe</TextBlock>
+            <TextBox x:Name="Mdp" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock >Entrer votre prénom</TextBlock>
+            <TextBox x:Name="prenom" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock >Entrer votre nom</TextBlock>
+            <TextBox x:Name="nom" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock >Entrer votre adresse</TextBlock>
+            <TextBox x:Name="adresse" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock >Entrer votre email</TextBlock>
+            <TextBox x:Name="email" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock >Entrer votre numéro de téléphone</TextBlock>
+            <TextBox x:Name="tele" />
+        </StackPanel>
+        
+        <!--Changer sa en combobox si le temps le permet-->
+        <StackPanel>
+            <TextBlock >Entrer votre type de voiture</TextBlock>
+            <TextBox x:Name="voiture" />
+        </StackPanel>
+        
+        <StackPanel>
+            <Button x:Name="Submit" Click="Submit_Click" >Confirmer</Button>
+        </StackPanel>
+
+    </StackPanel>
+</Page>

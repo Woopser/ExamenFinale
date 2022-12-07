@@ -21,17 +21,16 @@ namespace Covoiturage
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CreationCompte : Page
+    public sealed partial class creationAdministrateur : Page
     {
-        public CreationCompte()
+        public creationAdministrateur()
         {
             this.InitializeComponent();
         }
 
-        string typeC = "";
         private void btAjout_Click(object sender, RoutedEventArgs e)
         {
-            GestionBD.getInstance().AjoutCompte(nomU.Text,Mdp.Text,"Administrateur");
+            GestionBD.getInstance().AjoutCompte(nomU.Text, Mdp.Text, "Administrateur");
             Frame.Navigate(typeof(login));
         }
     }
