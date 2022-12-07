@@ -33,5 +33,10 @@ namespace Covoiturage
         {
             //Pour afficher les details d'un trajet
         }
+
+        private void arret_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

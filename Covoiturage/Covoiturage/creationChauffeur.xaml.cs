@@ -27,5 +27,16 @@ namespace Covoiturage
         {
             this.InitializeComponent();
         }
+
+        private void Submit_Click(object sender, RoutedEventArgs e)
+        {
+            GestionBD.getInstance().AjoutCompte(nomU.Text, Mdp.Text, "Chauffeur");
+
+
+            int b = GestionBD.getInstance().GetIdCompte(nomU.Text);
+
+            GestionBD.getInstance().AjoutChauf(b, prenom.Text, nom.Text, adresse.Text, tele.Text, email.Text, voiture.Text);
+            Frame.Navigate(typeof(login));
+        }
     }
 }

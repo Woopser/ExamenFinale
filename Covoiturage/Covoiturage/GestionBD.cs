@@ -59,6 +59,35 @@ namespace Covoiturage
             return liste;
         }
 
+        //pour aller cherher les trajet dispo 
+        public ObservableCollection<Trajet> getTrajetDisp()
+        {
+            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from trajet WHERE place_disp > 0 AND ";
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                Trajet t = new Trajet()
+                {
+                    Id_trajet = r.GetInt32("id_trajet"),
+                    Id_chauffeur = r.GetInt32("id_chauffeur"),
+                    PlaceDisp = r.GetInt32("place_disp"),
+                    VilleDep = r.GetString("ville_dep"),
+                    VilleArr = r.GetString("ville_arr"),
+                    HeureDep = r.GetInt32("heureDep"),
+                    HeureArr = r.GetInt32("heureArr")
+                };
+                liste.Add(t);
+            }
+            r.Close();
+            con.Close();
+            return liste;
+        }
+
         //Pour aller chercher la liste des clients
         public ObservableCollection<Client> getClients()
         {
@@ -173,7 +202,78 @@ namespace Covoiturage
             commande.ExecuteNonQuery();
             con.Close();
         }
-        //Ajouter un Chauffeur + Ajouter un clients a mettre ici
+
+        //Ajouter un chauffeur
+        public void AjoutChauf(int id_com, string pre, string nom, string adres, string tele, string email, string voiture)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "INSERT INTO chauffeur (id_compte,prenom,nom,adresse,no_telephone,email,voiture) VALUES (@id_com,@pre,@nom,@adres,@tele,@email,@voiture)";
+
+            commande.Parameters.AddWithValue("@id_com", id_com);
+            commande.Parameters.AddWithValue("@pre", pre);
+            commande.Parameters.AddWithValue("@nom", nom);
+            commande.Parameters.AddWithValue("@adres", adres);
+            commande.Parameters.AddWithValue("@tele", tele);
+            commande.Parameters.AddWithValue("@email", email);
+            commande.Parameters.AddWithValue("@voiture", voiture);
+
+            con.Open();
+            commande.Prepare();
+            commande.ExecuteNonQuery();
+            con.Close();
+        }
+
+        //Ajout de client
+        public void AjoutCli(int id_com, string pre, string nom, string adres, string tele, string email, string villeDep, string villeArr)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "INSERT INTO client (id_compte,prenom,nom,adresse,email,no_telephone,ville_dep, ville_arr) VALUES (@id_com,@pre,@nom,@adres,@email,@tele,@villeDep, @villeArr)";
+
+            commande.Parameters.AddWithValue("@id_com", id_com);
+            commande.Parameters.AddWithValue("@pre", pre);
+            commande.Parameters.AddWithValue("@nom", nom);
+            commande.Parameters.AddWithValue("@adres", adres);
+            commande.Parameters.AddWithValue("@tele", tele);
+            commande.Parameters.AddWithValue("@email", email);
+            commande.Parameters.AddWithValue("@villeDep", villeDep);
+            commande.Parameters.AddWithValue("@villeArr", villeArr);
+
+
+            con.Open();
+            commande.Prepare();
+            commande.ExecuteNonQuery();
+            con.Close();
+        }
+
+        //Get un id_compte
+        public int GetIdCompte(string nomU)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "SELECT * FROM compte WHERE nom_utilisateur LIKE @nomU";
+
+            commande.Parameters.AddWithValue("@nomU", nomU);
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+
+            if (r.Read())
+            {
+                int c;
+                c = r.GetInt32("id_compte");
+
+                r.Close();
+                con.Close();
+                return c;
+
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
         //SUPPRIMER UN UTILISATEUR, PAS UTILISER MARCHE AVEC UN ID
         public void SuppCompte(int id)
@@ -222,6 +322,33 @@ namespace Covoiturage
             return liste;
         }
 
+        //Get Type de compte 
+        public string GetTypeCompte(string nomU)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "SELECT * FROM compte WHERE nom_utilisateur LIKE @nomU";
+
+            commande.Parameters.AddWithValue("@nomU", nomU);
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+
+            if (r.Read())
+            {
+                string c;
+                c = r.GetString("type_compte");
+
+                r.Close();
+                con.Close();
+                return c;
+
+            }
+            else
+            {
+                return "Invalide";
+            }
+        }
 
 
 

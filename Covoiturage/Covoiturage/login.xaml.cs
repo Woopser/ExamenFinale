@@ -39,7 +39,22 @@ namespace Covoiturage
             Compte B = GestionBD.getInstance().verifConnect(tbMdp.Text, tbUser.Text);
             if (B != null)
             {
-                Logi.Text = "Reussite";
+                string type = GestionBD.getInstance().GetTypeCompte(tbUser.Text);
+
+                if(type == "Administateur")
+                {
+                    //Frame.Navigate(typeof(/*ENTRER PAGE ICI*/));
+                }
+                else if(type == "Chauffeur")
+                {
+                    //Frame.Navigate(typeof(/*ENTRER PAGE ICI*/));
+                }
+                else if(type== "Client")
+                {
+                    //Trouver comment envoyer un objet de type client du client qui est login pis garder sa dans MainWindow + creer un objet "LoggedUser" pour garder les pistes du user qui est connecter IMPORTANT
+                    //DEVRAIT ETRE LA PROCHAINE ÉTAPE
+                    Frame.Navigate(typeof(MainAffiche));
+                }
             }
             else
             {

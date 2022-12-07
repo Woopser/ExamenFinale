@@ -8,7 +8,55 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <StackPanel>
 
-    </Grid>
+        <StackPanel>
+            <TextBlock >Entrer un nom d'utilisateur</TextBlock>
+            <TextBox x:Name="nomU" />
+        </StackPanel>
+        <StackPanel>
+            <TextBlock >Entrer un mot de passe</TextBlock>
+            <TextBox x:Name="Mdp" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock >Entrer votre prénom</TextBlock>
+            <TextBox x:Name="prenom" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock >Entrer votre nom</TextBlock>
+            <TextBox x:Name="nom" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock >Entrer votre adresse</TextBlock>
+            <TextBox x:Name="adresse" />
+        </StackPanel>
+        
+        <StackPanel>
+            <TextBlock >Entrer votre email</TextBlock>
+            <TextBox x:Name="email" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock >Entrer votre numéro de téléphone</TextBlock>
+            <TextBox x:Name="tele" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock >Entrer votre ville de départure</TextBlock>
+            <TextBox x:Name="villeDep" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock >Entrer votre ville d'arrivée</TextBlock>
+            <TextBox x:Name="villeArr" />
+        </StackPanel>
+
+        <StackPanel>
+            <Button x:Name="Submit" Click="Submit_Click" >Confirmer</Button>
+        </StackPanel>
+
+    </StackPanel>
 </Page>
