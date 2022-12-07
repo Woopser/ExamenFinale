@@ -84,6 +84,32 @@ namespace Covoiturage
             return liste;
         }
 
+        // Rechercher les comptes pour le login
+        public ObservableCollection<Comptes> getComptes()
+        {
+            ObservableCollection<Comptes> liste = new ObservableCollection<Comptes>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from compte";
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                Comptes c = new Comptes()
+                {
+                    Id_compte = r.GetInt32("id_compte"),
+                    Type_compte = r.GetString("type_compte"),
+                    Nom_utilisateur = r.GetString("nom_utilisateur"),
+                    Password = r.GetString("password")
+                };
+                liste.Add(c);
+            }
+            r.Close();
+            con.Close();
+            return liste;
+        }
+
         //Autre fonction 
     }
 }

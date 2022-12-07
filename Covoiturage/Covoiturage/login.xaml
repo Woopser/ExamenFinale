@@ -21,10 +21,14 @@
             <TextBox x:Name="tbMdp"  Width="200" HorizontalAlignment="Right" Margin="33,0,0,0"/>
         </StackPanel>
 
-        <Button x:Name="btnLogin" Content="Connecter" Background="Firebrick" Foreground="White" HorizontalAlignment="Right"/>
+        <TextBlock x:Name="tbErreur" Text="Vos informations ne correspondent pas" Visibility="Collapsed" Foreground="Red" />
+
+        <Button x:Name="btnLogin" Content="Connecter" Background="Firebrick" Foreground="White" HorizontalAlignment="Right" Click="btnLogin_Click"/>
 
         <TextBlock Text="Créé vous un compte">
              <Hyperlink Click="Hyperlink_Click"/>
         </TextBlock>
+
+        <ListView x:Name="lvLogin" Visibility="Collapsed" />
     </StackPanel>
 </Page>

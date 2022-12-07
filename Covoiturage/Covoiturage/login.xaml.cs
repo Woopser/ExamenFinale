@@ -26,11 +26,31 @@ namespace Covoiturage
         public login()
         {
             this.InitializeComponent();
+            lvLogin.ItemsSource = GestionBD.getInstance().getComptes();
         }
 
         private void Hyperlink_Click(Microsoft.UI.Xaml.Documents.Hyperlink sender, Microsoft.UI.Xaml.Documents.HyperlinkClickEventArgs args)
         {
             Frame.Navigate(typeof(CreationCompte));
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            string login = tbMdp.Text + tbMdp.Text;
+
+            foreach (var item in lvLogin.Items)
+            {
+                if (Convert.ToString(item) == login)
+                {
+                    tbErreur.Visibility = Visibility.Collapsed;
+
+                    Frame.Navigate(typeof(MainAffiche));
+
+                    break;
+                }
+                else
+                    tbErreur.Visibility = Visibility.Visible;
+            }
         }
     }
 }

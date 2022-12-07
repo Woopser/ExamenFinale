@@ -45,6 +45,21 @@ namespace Covoiturage
                 case "Trajet":
                     mainFrame.Navigate(typeof(MainAffiche));
                     break;
+                case "Demander un arrêt":
+                    mainFrame.Navigate(typeof(DemandeArret));
+                    break;
+                case "Ajouter un trajet":
+                    mainFrame.Navigate(typeof(AjoutTrajet));
+                    break;
+                case "AjouterArret":
+                    mainFrame.Navigate(typeof(AjoutArret));
+                    break;
+                case "Bilan de la journée":
+                    mainFrame.Navigate(typeof(VoirBilan));
+                    break;
+                case "Voir les factures":
+                    mainFrame.Navigate(typeof(VoirFactures));
+                    break;
                 default:
                     break;
             }

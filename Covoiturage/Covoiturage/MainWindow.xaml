@@ -18,7 +18,17 @@
             
             <NavigationViewItemSeparator />
 
-            <NavigationViewItem Content="Trajet" Icon="Flag" Tag="Trajets"  Foreground="Firebrick" />
+            <NavigationViewItem Content="Demander un arrêt" Icon="Flag" Tag="DemandeArret"  Foreground="Firebrick" />
+
+            <NavigationViewItemSeparator />
+
+            <NavigationViewItem Content="Ajouter un trajet" Icon="Flag" Tag="AjoutTrajet"  Foreground="Firebrick" />
+            <NavigationViewItem Content="Ajouter un arrêt" Icon="Flag" Tag="AjoutArret"  Foreground="Firebrick" />
+
+            <NavigationViewItemSeparator />
+
+            <NavigationViewItem Content="Bilan de la journée" Icon="Flag" Tag="Bilan"  Foreground="Firebrick" />
+            <NavigationViewItem Content="Voir les factures" Icon="Flag" Tag="Factures"  Foreground="Firebrick" />
             <!--<NavigationViewItem Content="Agenda" Icon="Calendar"  Foreground="Firebrick"/>Bolbofjfgjg
             <NavigationViewItemSeparator/>
             <NavigationViewItemHeader Content="Zone 2"  Foreground="Firebrick"/>
