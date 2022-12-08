@@ -37,7 +37,10 @@ namespace Covoiturage
         public MainWindow()
         {
             this.InitializeComponent();
+
             mainFrame.Navigate(typeof(login));
+
+            Compte c = GestionBD.getInstance().Utilisateur;
         }
 
         private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)

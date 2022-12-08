@@ -14,34 +14,42 @@
         <ListView x:Name="lvTraj" SelectionChanged="lvTraj_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Trajet">
-                    <StackPanel Margin="5,10,0,0">
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock Text="{x:Bind VilleDep}" Margin="0,0,10,0" FontSize="20"/>
-                            <TextBlock Text="-->" FontSize="20" />
-                            <TextBlock Text="{x:Bind VilleArr}" Margin="10,0,0,0" FontSize="20" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal" >
-                            <TextBlock Text="Chauffeur: "  Margin="0,0,10,0"/>
-                            <TextBlock Text="{x:Bind Id_chauffeur}"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Heures: "  Margin="0,0,10,0"/>
-                            <TextBlock Text="{x:Bind HeureArr}" />
-                            <TextBlock Text=":00 / " />
-                            <TextBlock Text="{x:Bind HeureDep}"  Margin="2,0,0,0"/>
-                            <TextBlock Text=":00" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <TextBlock Text="Nombre de places disponibles:" />
-                            <TextBlock Text="{x:Bind PlaceDisp}"  Margin="10,0,0,0"/>
-                        </StackPanel>
+                    <Grid Margin="0,0,0,10" x:Name="grid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                         
-                        <!--Bout de code seulement pour clients-->
-                        <Button Content="Demander un arrêt" x:Name="btnArret" Click="arret_Click" Tag="{x:Bind Id_trajet}" />
-                    </StackPanel>
+                        <StackPanel Margin="5,10,0,0" Grid.Column="0">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <TextBlock Text="{x:Bind VilleDep}" Margin="0,0,10,0" FontSize="20"/>
+                                <TextBlock Text="-->" FontSize="20" />
+                                <TextBlock Text="{x:Bind VilleArr}" Margin="10,0,0,0" FontSize="20" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" >
+                                <TextBlock Text="Chauffeur : "  Margin="0,0,10,0"/>
+                                <TextBlock Text="{x:Bind Id_chauffeur}"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Heures : "  Margin="0,0,10,0"/>
+                                <TextBlock Text="{x:Bind HeureArr}" />
+                                <TextBlock Text=":00 / " />
+                                <TextBlock Text="{x:Bind HeureDep}"  Margin="2,0,0,0"/>
+                                <TextBlock Text=":00" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical"  Margin="0,10,0,10"  Grid.Column="1" >
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                                <TextBlock Text="Places disponibles :" FontSize="20"/>
+                                <TextBlock Text="{x:Bind PlaceDisp}"  Margin="10,0,0,0" FontSize="20"/>
+                            </StackPanel>
+
+                            <Button x:Name="btnArret" Content="Demander un arrêt" Click="btnArret_Click" Tag="{x:Bind Id_trajet}" Background="Firebrick" Foreground="White" />
+                        </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

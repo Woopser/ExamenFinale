@@ -18,6 +18,10 @@
             
             <NavigationViewItemSeparator />
 
+            <NavigationViewItem Content="Commencer un trajet" Icon="Add" Tag="Trajets"  Foreground="Firebrick" />
+
+            <NavigationViewItemSeparator />
+            
             <NavigationViewItem Content="Login" Icon="Folder" Tag="Login"  Foreground="Firebrick" />
             <!--<NavigationViewItem Content="Agenda" Icon="Calendar"  Foreground="Firebrick"/>Bolbofjfgjg
             <NavigationViewItemSeparator/>
@@ -27,7 +31,11 @@
             A AJOUTER QUAND ON VA AJOUTER PLUS DE FONCTIONNALITÉ-->
         </NavigationView.MenuItems>
 
-        <Frame x:Name="mainFrame"/>
+        <NavigationView.FooterMenuItems>
+            <NavigationViewItem Content="Se déconnecter" Icon="Cancel" Tag="LogOut"  Foreground="Firebrick" />
+        </NavigationView.FooterMenuItems>
+
+        <Frame x:Name="mainFrame" Background="Firebrick"/>
 
     </NavigationView>
 </Window>

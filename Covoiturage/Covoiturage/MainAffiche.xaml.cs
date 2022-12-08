@@ -28,10 +28,16 @@ namespace Covoiturage
             this.InitializeComponent();
 
             lvTraj.ItemsSource = GestionBD.getInstance().getTrajet();
+
             Compte c = GestionBD.getInstance().Utilisateur;
 
-
             if (c.type_compte == "Chauffeur")
+            {
+                
+                btnArret.Visibility = Visibility.Collapsed;
+            }
+
+            if (c.type_compte == "Admin")
             {
                 btnArret.Visibility = Visibility.Collapsed;
             }
@@ -40,6 +46,7 @@ namespace Covoiturage
             {
                 btnArret.Visibility = Visibility.Visible;
             }
+
 
         }
 
@@ -51,6 +58,11 @@ namespace Covoiturage
         private void arret_Click(object sender, RoutedEventArgs e)
         {
            
+        }
+
+        private void btnArret_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
