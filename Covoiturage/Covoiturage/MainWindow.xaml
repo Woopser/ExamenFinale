@@ -15,7 +15,8 @@
             <NavigationViewItemSeparator />
             
             <NavigationViewItem Content="Trajet" Icon="Flag" Tag="Trajets"  Foreground="Firebrick" />
-            
+            <NavigationViewItem Content="Demander un arrêt" Icon="Flag" Tag="Trajets"  Foreground="Firebrick" />
+
             <NavigationViewItemSeparator />
 
             <NavigationViewItem Content="Commencer un trajet" Icon="Add" Tag="Trajets"  Foreground="Firebrick" />

@@ -459,6 +459,27 @@ namespace Covoiturage
             }
         }
 
+        public string GetVilles()
+        {
+            ObservableCollection<string> liste = new ObservableCollection<string>();
+
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "SELECT DISTINCT ville_dep FROM trajet";
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+
+            while (r.Read())
+            {
+                string c = r.GetString();
+
+                liste.Add(c);
+            }
+
+            return liste;
+        }
+
 
 
 

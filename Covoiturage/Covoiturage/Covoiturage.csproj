@@ -17,6 +17,7 @@
     <None Remove="creationChauffeur.xaml" />
     <None Remove="creationClient.xaml" />
     <None Remove="CreationCompte.xaml" />
+    <None Remove="DemanderArret.xaml" />
     <None Remove="login.xaml" />
     <None Remove="MainAffiche.xaml" />
   </ItemGroup>
@@ -45,6 +46,11 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="DemanderArret.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="creationClient.xaml">

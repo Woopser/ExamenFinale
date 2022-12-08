@@ -21,18 +21,13 @@ namespace Covoiturage
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainAffiche : Page
+    public sealed partial class DemanderArret : Page
     {
-        public MainAffiche()
+        public DemanderArret()
         {
             this.InitializeComponent();
 
-            lvTraj.ItemsSource = GestionBD.getInstance().getTrajet();
-        }
-
-        private void lvTraj_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //Pour afficher les details d'un trajet
+            cbVille.ItemsSource = 
         }
     }
 }

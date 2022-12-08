@@ -52,6 +52,9 @@ namespace Covoiturage
                 case "Trajet":
                     mainFrame.Navigate(typeof(MainAffiche));
                     break;
+                case "Demander un arrêt":
+                    mainFrame.Navigate(typeof(DemanderArret));
+                    break;
                 case "Login":
                     mainFrame.Navigate(typeof(login));
                     break;
