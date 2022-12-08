@@ -206,6 +206,14 @@ BEGIN
     return nb;
 end //
 
+DELIMITER //
+CREATE FUNCTION voiture_chauffeur (type int) RETURNS VARCHAR(10)
+BEGIN
+    DECLARE voiture VARCHAR(10);
+    SELECT voiture INTO voiture FROM chauffeur WHERE id_chauffeur like type;
+    RETURN voiture;
+END //
+
 /*Test de choses plus insert dans trajet */
 SELECT * FRom compte WHERE nom_utilisateur LIKE 'Alex' AND password LIKE 'Thomas';
 
