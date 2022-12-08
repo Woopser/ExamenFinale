@@ -24,13 +24,15 @@ namespace Covoiturage
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
+
     public sealed partial class MainWindow : Window
     {
 
         MySqlConnection con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2022_420326ri_eq4;Uid=2046711;Pwd=2046711");
         ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
         ObservableCollection<string> ville = new ObservableCollection<string>(); //Ajouter une liste des villes prise en charge
-        
+
+
 
         public MainWindow()
         {

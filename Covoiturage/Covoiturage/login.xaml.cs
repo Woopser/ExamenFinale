@@ -53,6 +53,7 @@ namespace Covoiturage
                 {
                     //Trouver comment envoyer un objet de type client du client qui est login pis garder sa dans MainWindow + creer un objet "LoggedUser" pour garder les pistes du user qui est connecter IMPORTANT
                     //DEVRAIT ETRE LA PROCHAINE ÉTAPE
+                    
                     Frame.Navigate(typeof(MainAffiche));
                 }
             }

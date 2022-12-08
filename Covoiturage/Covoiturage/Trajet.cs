@@ -15,17 +15,16 @@ namespace Covoiturage
         string villeArr;
         int heureDep;
         int heureArr;
+        int estFini;
 
         public int Id_trajet { get => id_trajet; set => id_trajet = value; }
         public int Id_chauffeur { get => id_chauffeur; set => id_chauffeur = value; }
-
         public int PlaceDisp { get => placeDisp; set => placeDisp = value; }
         public string VilleDep { get => villeDep; set => villeDep = value; }
         public string VilleArr { get => villeArr; set => villeArr = value; }
         public int HeureDep { get => heureDep; set => heureDep = value; }
         public int HeureArr { get => heureArr; set => heureArr = value; }
-
-
+        public int EstFini { get => estFini; set => estFini = value; }
 
     }
 }

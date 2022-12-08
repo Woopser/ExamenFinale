@@ -26,7 +26,21 @@ namespace Covoiturage
         public MainAffiche()
         {
             this.InitializeComponent();
+
             lvTraj.ItemsSource = GestionBD.getInstance().getTrajet();
+            Compte c = GestionBD.getInstance().Utilisateur;
+
+
+            if (c.type_compte == "Chauffeur")
+            {
+                btnArret.Visibility = Visibility.Collapsed;
+            }
+
+            if (c.type_compte == "Client")
+            {
+                btnArret.Visibility = Visibility.Visible;
+            }
+
         }
 
         private void lvTraj_SelectionChanged(object sender, SelectionChangedEventArgs e)

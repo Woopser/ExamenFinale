@@ -40,9 +40,7 @@
                         </StackPanel>
                         
                         <!--Bout de code seulement pour clients-->
-                        <StackPanel Visibility="Collapsed" x:Name="BoutCli">
-                            <Button x:Name="arret" Click="arret_Click" Tag="{x:Bind Id_trajet}">M'inscrire au trajet</Button>
-                        </StackPanel>
+                        <Button Content="Demander un arrêt" x:Name="btnArret" Click="arret_Click" Tag="{x:Bind Id_trajet}" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

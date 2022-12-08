@@ -170,10 +170,8 @@ namespace Covoiturage
             con.Open();
             MySqlDataReader r = commande.ExecuteReader();
 
-             if (r.Read())
-             {
-
-
+            if (r.Read())
+            {
                 utilisateur = new Compte()
                 {
                     Id_compte = r.GetInt32("id_compte"),
@@ -184,28 +182,33 @@ namespace Covoiturage
 
                 if(utilisateur.type_compte == "Client")
                 {
-                   UtilCli = getClientSeul(utilisateur.id_compte);
+                    UtilCli = getClientSeul(utilisateur.id_compte);
+
+                    con.Close();
+
                     return utilisateur;
                 }
-                else if(utilisateur.type_compte == "Chauffeur")
+                
+                if(utilisateur.type_compte == "Chauffeur")
                 {
                     utilChauf = getChauffeurSeul(utilisateur.id_compte);
+
+                    con.Close();
+
                     return utilisateur;
                 }
+               
+                r.Close();
+                con.Close();
 
-                
-                r.Close();
-                con.Close();
                 return utilisateur;
-                
-             }
+            }
             else
-            {
-                
+            {               
                 r.Close();
                 con.Close();
-                return null;
-                
+
+                return null;   
             }
         }
 
@@ -215,11 +218,13 @@ namespace Covoiturage
             ObservableCollection<Client> liste = new ObservableCollection<Client>();
             MySqlCommand commande = new MySqlCommand();
             commande.Connection = con;
-            commande.CommandText = "Select * from client WHERE compte_id LIKE @id";
+            commande.CommandText = "Select * from client WHERE id_compte LIKE @id";
 
             commande.Parameters.AddWithValue("@id", id);
 
+            con.Close();
             con.Open();
+
             MySqlDataReader r = commande.ExecuteReader();
             if (r.Read())
             {
@@ -251,17 +256,18 @@ namespace Covoiturage
         {
             MySqlCommand commande = new MySqlCommand();
             commande.Connection = con;
-            commande.CommandText = "Select * from chauffeur WHERE compte_id LIKE @id";
+            commande.CommandText = "Select * from chauffeur WHERE id_compte LIKE @id";
 
             commande.Parameters.AddWithValue("@id", id);
 
+            con.Close();
             con.Open();
             MySqlDataReader r = commande.ExecuteReader();
             if (r.Read())
             {
                 Chauffeur c = new Chauffeur()
                 {
-                    id_chauffeur = r.GetInt32("id_client"),
+                    id_chauffeur = r.GetInt32("id_chauffeur"),
                     Id_compte = r.GetInt32("id_compte"),
                     Prenom = r.GetString("prenom"),
                     Nom = r.GetString("nom"),
@@ -271,12 +277,16 @@ namespace Covoiturage
                     Voiture = r.GetString("voiture"),
                     
                 };
+
                 r.Close();
                 con.Close();
+
                 return c;
             }
             else
             {
+                con.Close();
+
                 return null;
             }
 
@@ -438,11 +448,13 @@ namespace Covoiturage
 
                 r.Close();
                 con.Close();
-                return c;
 
+                return c;
             }
             else
             {
+                con.Close();
+
                 return "Invalide";
             }
         }
