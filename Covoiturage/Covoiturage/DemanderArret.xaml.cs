@@ -23,11 +23,109 @@ namespace Covoiturage
     /// </summary>
     public sealed partial class DemanderArret : Page
     {
+        string ville;
+        int heure;
+        string date;
+
         public DemanderArret()
         {
             this.InitializeComponent();
 
-            cbVille.ItemsSource = 
+            cbVille.ItemsSource = GestionBD.getInstance().GetVilles();
+            cbDate.ItemsSource = GestionBD.getInstance().GetDates();
+        }
+
+        private void cbHeure_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch(sender)
+            {
+                case "12:00":
+                    heure = 12;
+                    break;
+                case "13:00":
+                    heure = 13;
+                    break;
+                case "14:00":
+                    heure = 14;
+                    break;
+                case "15:00":
+                    heure = 15;
+                    break;
+                case "16:00":
+                    heure = 16;
+                    break;
+            }
+        }
+
+        private void cbVille_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ville = sender.ToString();
+           /* switch (sender)
+            {
+                case "Batiscan":
+                    ville = "Batiscan";
+                    break;
+                case "La Tuque":
+                    ville = "La Tuque";
+                    break;
+                case "Louiseville":
+                    ville = "Louiseville";
+                    break;
+                case "Maskinongé":
+                    ville = "Maskinongé";
+                    break;
+                case "Mékinac":
+                    ville = "Mékinac";
+                    break;
+                case "Saint-Tite":
+                    ville = "Saint-Tite";
+                    break;
+                case "Shawinigan":
+                    ville = "Shawinigan";
+                    break;
+                case "Trois-Rivières":
+                    ville = "Trois-Rivières";
+                    break;
+            }*/
+        }
+
+        private void cbDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            date = sender.ToString();
+        }
+
+        private void btnConfirmer_Click(object sender, RoutedEventArgs e)
+        {
+            spTrajets.Visibility = Visibility.Visible;
+
+            if (cbVille.SelectedIndex == -1 && cbHeure.SelectedIndex == -1 && cbDate.SelectedIndex == -1)
+                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajets();
+
+            else if (cbVille.SelectedIndex == -1 && cbHeure.SelectedIndex == -1)
+                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsD(date);
+
+            else if (cbVille.SelectedIndex == -1 && cbDate.SelectedIndex == -1)
+                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsH(heure);
+
+            else if (cbDate.SelectedIndex == -1 && cbHeure.SelectedIndex == -1)
+                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsV(ville);
+
+            else if (cbVille.SelectedIndex == -1)
+                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsHD(heure, date);
+
+            else if (cbHeure.SelectedIndex == -1)
+                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVD(ville, date);
+
+            else if (cbDate.SelectedIndex == -1)
+                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVH(ville, heure);
+
+            else
+                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVHD(ville, heure, date);
+        }
+
+        private void btnAjouter_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -459,7 +459,8 @@ namespace Covoiturage
             }
         }
 
-        public string GetVilles()
+        // Avoir toutes les villes disponibles
+        public ObservableCollection<string> GetVilles()
         {
             ObservableCollection<string> liste = new ObservableCollection<string>();
 
@@ -468,19 +469,323 @@ namespace Covoiturage
             commande.CommandText = "SELECT DISTINCT ville_dep FROM trajet";
 
             con.Open();
-            MySqlDataReader r = commande.ExecuteReader();
+                MySqlDataReader r = commande.ExecuteReader();
 
-            while (r.Read())
-            {
-                string c = r.GetString();
-
-                liste.Add(c);
-            }
+                while (r.Read())
+                {
+                    string c = r.GetString("ville_dep");
+                    liste.Add(c);
+                }
+            r.Close();
+            con.Close();
 
             return liste;
         }
 
+        // Avoir toute les heures disponibles
+        public ObservableCollection<string> GetHeures()
+        {
+            ObservableCollection<string> liste = new ObservableCollection<string>();
 
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "SELECT DISTINCT heureDep FROM trajet";
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+
+            while (r.Read())
+            {
+                string c = r.GetString("heureDep") + ":00";
+                liste.Add(c);
+            }
+            r.Close();
+            con.Close();
+
+            return liste;
+        }
+
+        // Avoir toutes les dates disponibles
+        public ObservableCollection<string> GetDates()
+        {
+            ObservableCollection<string> liste = new ObservableCollection<string>();
+
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "SELECT DISTINCT journee FROM trajet";
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+
+            while (r.Read())
+            {
+                string c = r.GetString("journee");
+                liste.Add(c);
+            }
+            r.Close();
+            con.Close();
+
+            return liste;
+        }
+
+        // Demander tous les trajets disponibles
+        public ObservableCollection<Trajet> getTrajets()
+        {
+            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from trajet";
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                Trajet t = new Trajet()
+                {
+                    Id_trajet = r.GetInt32("id_trajet"),
+                    Id_chauffeur = r.GetInt32("id_chauffeur"),
+                    PlaceDisp = r.GetInt32("place_disp"),
+                    VilleDep = r.GetString("ville_dep"),
+                    VilleArr = r.GetString("ville_arr"),
+                    HeureDep = r.GetInt32("heureDep"),
+                    HeureArr = r.GetInt32("heureArr")
+                };
+                liste.Add(t);
+            }
+            r.Close();
+            con.Close();
+
+            return liste;
+        }
+
+        // Demander les trajets avec ville, heure et date
+        public ObservableCollection<Trajet> getTrajetsVHD(string ville, int heure, DateOnly date)
+        {
+            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from trajet WHERE ville_Dep = @ville AND heureDep = @heure AND journee = @date";
+
+            commande.Parameters.AddWithValue("@ville", ville);
+            commande.Parameters.AddWithValue("@heure", heure);
+            commande.Parameters.AddWithValue("@date", date);
+
+            con.Open();
+                MySqlDataReader r = commande.ExecuteReader();
+                while (r.Read())
+                {
+                    Trajet t = new Trajet()
+                    {
+                        Id_trajet = r.GetInt32("id_trajet"),
+                        Id_chauffeur = r.GetInt32("id_chauffeur"),
+                        PlaceDisp = r.GetInt32("place_disp"),
+                        VilleDep = r.GetString("ville_dep"),
+                        VilleArr = r.GetString("ville_arr"),
+                        HeureDep = r.GetInt32("heureDep"),
+                        HeureArr = r.GetInt32("heureArr")
+                    };
+                    liste.Add(t);
+                }
+            r.Close();
+            con.Close();
+
+            return liste;
+        }
+
+        // Demander les trajets avec ville et heure
+        public ObservableCollection<Trajet> getTrajetsVH(string ville, int heure)
+        {
+            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from trajet WHERE ville_Dep = @ville AND heureDep = @heure";
+
+            commande.Parameters.AddWithValue("@ville", ville);
+            commande.Parameters.AddWithValue("@heure", heure);
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                Trajet t = new Trajet()
+                {
+                    Id_trajet = r.GetInt32("id_trajet"),
+                    Id_chauffeur = r.GetInt32("id_chauffeur"),
+                    PlaceDisp = r.GetInt32("place_disp"),
+                    VilleDep = r.GetString("ville_dep"),
+                    VilleArr = r.GetString("ville_arr"),
+                    HeureDep = r.GetInt32("heureDep"),
+                    HeureArr = r.GetInt32("heureArr")
+                };
+                liste.Add(t);
+            }
+            r.Close();
+            con.Close();
+
+            return liste;
+        }
+
+        // Demander les trajets avec ville et date
+        public ObservableCollection<Trajet> getTrajetsVD(string ville, string date)
+        {
+            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from trajet WHERE ville_Dep = @ville AND journee = @date";
+
+            commande.Parameters.AddWithValue("@ville", ville);
+            commande.Parameters.AddWithValue("@date", date);
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                Trajet t = new Trajet()
+                {
+                    Id_trajet = r.GetInt32("id_trajet"),
+                    Id_chauffeur = r.GetInt32("id_chauffeur"),
+                    PlaceDisp = r.GetInt32("place_disp"),
+                    VilleDep = r.GetString("ville_dep"),
+                    VilleArr = r.GetString("ville_arr"),
+                    HeureDep = r.GetInt32("heureDep"),
+                    HeureArr = r.GetInt32("heureArr")
+                };
+                liste.Add(t);
+            }
+            r.Close();
+            con.Close();
+
+            return liste;
+        }
+
+        // Demander les trajets avec heure et date
+        public ObservableCollection<Trajet> getTrajetsHD(int heure, string date)
+        {
+            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from trajet WHERE heureDep = @heure AND journee = @date";
+
+            commande.Parameters.AddWithValue("@heure", heure);
+            commande.Parameters.AddWithValue("@date", date);
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                Trajet t = new Trajet()
+                {
+                    Id_trajet = r.GetInt32("id_trajet"),
+                    Id_chauffeur = r.GetInt32("id_chauffeur"),
+                    PlaceDisp = r.GetInt32("place_disp"),
+                    VilleDep = r.GetString("ville_dep"),
+                    VilleArr = r.GetString("ville_arr"),
+                    HeureDep = r.GetInt32("heureDep"),
+                    HeureArr = r.GetInt32("heureArr")
+                };
+                liste.Add(t);
+            }
+            r.Close();
+            con.Close();
+
+            return liste;
+        }
+
+        // Demander les trajets avec ville
+        public ObservableCollection<Trajet> getTrajetsV(string ville)
+        {
+            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from trajet WHERE ville_Dep = @ville";
+
+            commande.Parameters.AddWithValue("@ville", ville);
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                Trajet t = new Trajet()
+                {
+                    Id_trajet = r.GetInt32("id_trajet"),
+                    Id_chauffeur = r.GetInt32("id_chauffeur"),
+                    PlaceDisp = r.GetInt32("place_disp"),
+                    VilleDep = r.GetString("ville_dep"),
+                    VilleArr = r.GetString("ville_arr"),
+                    HeureDep = r.GetInt32("heureDep"),
+                    HeureArr = r.GetInt32("heureArr")
+                };
+                liste.Add(t);
+            }
+            r.Close();
+            con.Close();
+
+            return liste;
+        }
+
+        // Demander les trajets avec heure
+        public ObservableCollection<Trajet> getTrajetsH(int heure)
+        {
+            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from trajet WHERE heureDep = @heure";
+
+            commande.Parameters.AddWithValue("@heure", heure);
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                Trajet t = new Trajet()
+                {
+                    Id_trajet = r.GetInt32("id_trajet"),
+                    Id_chauffeur = r.GetInt32("id_chauffeur"),
+                    PlaceDisp = r.GetInt32("place_disp"),
+                    VilleDep = r.GetString("ville_dep"),
+                    VilleArr = r.GetString("ville_arr"),
+                    HeureDep = r.GetInt32("heureDep"),
+                    HeureArr = r.GetInt32("heureArr")
+                };
+                liste.Add(t);
+            }
+            r.Close();
+            con.Close();
+
+            return liste;
+        }
+
+        // Demander les trajets avec date
+        public ObservableCollection<Trajet> getTrajetsD(string date)
+        {
+            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from trajet WHERE journee = @date";
+
+            commande.Parameters.AddWithValue("@date", date);
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                Trajet t = new Trajet()
+                {
+                    Id_trajet = r.GetInt32("id_trajet"),
+                    Id_chauffeur = r.GetInt32("id_chauffeur"),
+                    PlaceDisp = r.GetInt32("place_disp"),
+                    VilleDep = r.GetString("ville_dep"),
+                    VilleArr = r.GetString("ville_arr"),
+                    HeureDep = r.GetInt32("heureDep"),
+                    HeureArr = r.GetInt32("heureArr")
+                };
+                liste.Add(t);
+            }
+            r.Close();
+            con.Close();
+
+            return liste;
+        }
 
 
         //Code pour crypter mes mots de passe CRYPTE EN HASH, N'EST PAS D'ÉCRYPTABLE

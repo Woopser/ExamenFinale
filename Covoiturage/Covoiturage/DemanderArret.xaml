@@ -9,7 +9,70 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel>
-        <TextBlock Text="De quelle ville partez-vous?" />
-        <ComboBox x:Name="cbVille" />
+        <StackPanel>
+            <TextBlock Text="De quelle ville partez-vous?" />
+            <ComboBox x:Name="cbVille" SelectionChanged="cbVille_SelectionChanged" />
+
+            <TextBlock Text="À quelle heure voulez-vous partir?" />
+            <ComboBox x:Name="cbHeure" SelectionChanged="cbHeure_SelectionChanged" >
+                <x:String>12:00</x:String>
+                <x:String>13:00</x:String>
+                <x:String>14:00</x:String>
+                <x:String>15:00</x:String>
+                <x:String>16:00</x:String>
+            </ComboBox>
+
+            <TextBlock Text="À quelle date voulez-vous partir?" />
+            <ComboBox x:Name="cbDate" SelectionChanged="cbDate_SelectionChanged" />
+
+            <Button x:Name="btnConfirmer" Content="Confirmer" Click="btnConfirmer_Click" />
+        </StackPanel>
+
+        <StackPanel x:Name="spTrajets" Visibility="Collapsed">
+            <TextBlock Text="Trajets disponibles" />
+
+            <ListView x:Name="lvTrajets">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Trajet">
+                        <Grid Margin="0,0,0,10" x:Name="grid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Margin="5,10,0,0" Grid.Column="0">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <TextBlock Text="{x:Bind VilleDep}" Margin="0,0,10,0" FontSize="20"/>
+                                    <TextBlock Text="-->" FontSize="20" />
+                                    <TextBlock Text="{x:Bind VilleArr}" Margin="10,0,0,0" FontSize="20" />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Text="Chauffeur : "  Margin="0,0,10,0"/>
+                                    <TextBlock Text="{x:Bind Id_chauffeur}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Heures : "  Margin="0,0,10,0"/>
+                                    <TextBlock Text="{x:Bind HeureArr}" />
+                                    <TextBlock Text=":00 / " />
+                                    <TextBlock Text="{x:Bind HeureDep}"  Margin="2,0,0,0"/>
+                                    <TextBlock Text=":00" />
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical"  Margin="0,10,0,10"  Grid.Column="1" >
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                                    <TextBlock Text="Places disponibles :" FontSize="20"/>
+                                    <TextBlock Text="{x:Bind PlaceDisp}"  Margin="10,0,0,0" FontSize="20"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button x:Name="btnAjouter" Click="btnAjouter_Click" />
+        </StackPanel>
     </StackPanel>
 </Page>
