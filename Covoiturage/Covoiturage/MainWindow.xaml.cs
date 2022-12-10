@@ -41,6 +41,33 @@ namespace Covoiturage
             mainFrame.Navigate(typeof(login));
 
             Compte c = GestionBD.getInstance().Utilisateur;
+            /*if (c != null)
+            {
+                switch (c.Type_compte)
+                {
+                    case "Client":
+                        Arret.Visibility = Visibility.Visible;
+                        ComTraj.Visibility = Visibility.Collapsed;
+                        break;
+                    case "Chauffeur":
+                        Arret.Visibility = Visibility.Collapsed;
+                        ComTraj.Visibility = Visibility.Visible;
+                        break;
+                    case "Administrateur":
+                        Arret.Visibility = Visibility.Visible;
+                        ComTraj.Visibility = Visibility.Visible;
+                        break;
+                    default:
+                        Arret.Visibility = Visibility.Collapsed;
+                        ComTraj.Visibility = Visibility.Collapsed;
+                        break;
+                }
+            }
+            else if(c == null)
+            {
+                Arret.Visibility = Visibility.Collapsed;
+                ComTraj.Visibility = Visibility.Collapsed;
+            }*/
         }
 
         private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)

@@ -15,11 +15,11 @@
             <NavigationViewItemSeparator />
             
             <NavigationViewItem Content="Trajet" Icon="Flag" Tag="Trajets"  Foreground="Firebrick" />
-            <NavigationViewItem Content="Demander un arrêt" Icon="Flag" Tag="Trajets"  Foreground="Firebrick" />
+            <NavigationViewItem Content="Demander un arrêt" Icon="Flag" Tag="Trajets"  x:Name="Arret"  Foreground="Firebrick" />
 
             <NavigationViewItemSeparator />
 
-            <NavigationViewItem Content="Commencer un trajet" Icon="Add" Tag="Trajets"  Foreground="Firebrick" />
+            <NavigationViewItem Content="Commencer un trajet" Icon="Add" Tag="Trajets" x:Name="ComTraj"  Foreground="Firebrick" />
 
             <NavigationViewItemSeparator />
             

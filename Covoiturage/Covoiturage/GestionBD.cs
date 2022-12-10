@@ -9,6 +9,8 @@ using System.Security.Cryptography;
 using System.IO;
 using System.Linq.Expressions;
 using System.Runtime.Intrinsics.Arm;
+using Microsoft.UI.Xaml.Controls;
+using System.Runtime.Intrinsics.X86;
 
 namespace Covoiturage
 {
@@ -353,6 +355,24 @@ namespace Covoiturage
             commande.ExecuteNonQuery();
             con.Close();
         }
+        //Ajout d'un arret 
+        public void AjoutArret(int id_traj, int id_cli, string vil, int heurArr)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "INSERT INTO arret (id_trajet,id_client,ville,heureArr) VALUES (@id_traj,@id_cli,@vil,@heurArr)";
+
+            commande.Parameters.AddWithValue("@id_traj", id_traj);
+            commande.Parameters.AddWithValue("@id_cli", id_cli);
+            commande.Parameters.AddWithValue("@vil", vil);
+            commande.Parameters.AddWithValue("@heurArr", heurArr);
+
+
+            con.Open();
+            commande.Prepare();
+            commande.ExecuteNonQuery();
+            con.Close();
+        }
 
         //Get un id_compte
         public int GetIdCompte(string nomU)
@@ -559,7 +579,7 @@ namespace Covoiturage
         }
 
         // Demander les trajets avec ville, heure et date
-        public ObservableCollection<Trajet> getTrajetsVHD(string ville, int heure, DateOnly date)
+        public ObservableCollection<Trajet> getTrajetsVHD(string ville, int heure, DateTime date)
         {
             ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
             MySqlCommand commande = new MySqlCommand();
@@ -787,6 +807,11 @@ namespace Covoiturage
             return liste;
         }
 
+        //Fonciton de connexion pour gerer les affaires qui se collapsed ou pas
+        public void onCheck()
+        {
+            //pas finis, peut etre inutile NE PAS SUPPRIMER
+        }
 
         //Code pour crypter mes mots de passe CRYPTE EN HASH, N'EST PAS D'ÉCRYPTABLE
         /*

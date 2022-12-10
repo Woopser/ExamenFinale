@@ -47,7 +47,7 @@ namespace Covoiturage
                 }
                 else if(type == "Chauffeur")
                 {
-                    //Frame.Navigate(typeof(/*ENTRER PAGE ICI*/));
+                    //Faut trouver le moyen de rafraichir la page MainWindow en ce login comme sa les choses vont se barrer si pas connecter
                 }
                 else if(type== "Client")
                 {

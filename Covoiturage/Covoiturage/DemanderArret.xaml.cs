@@ -27,6 +27,7 @@ namespace Covoiturage
         int heure;
         string date;
 
+        Client c = GestionBD.getInstance().UtilCli;
         public DemanderArret()
         {
             this.InitializeComponent();
@@ -37,7 +38,7 @@ namespace Covoiturage
 
         private void cbHeure_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch(sender)
+            switch (cbHeure.SelectedItem.ToString())
             {
                 case "12:00":
                     heure = 12;
@@ -54,12 +55,14 @@ namespace Covoiturage
                 case "16:00":
                     heure = 16;
                     break;
+                default:
+                    break;
             }
         }
 
         private void cbVille_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ville = sender.ToString();
+            ville = cbVille.SelectedItem.ToString();
            /* switch (sender)
             {
                 case "Batiscan":
@@ -91,7 +94,7 @@ namespace Covoiturage
 
         private void cbDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            date = sender.ToString();
+            date = cbDate.SelectedItem.ToString();
         }
 
         private void btnConfirmer_Click(object sender, RoutedEventArgs e)
@@ -120,12 +123,15 @@ namespace Covoiturage
                 lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVH(ville, heure);
 
             else
-                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVHD(ville, heure, date);
+            {
+                DateTime date1 = DateTime.Parse(date);
+                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVHD(ville, heure, date1);
+            }
         }
 
         private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
-
+            GestionBD.getInstance().AjoutArret(lvTrajets.SelectedIndex, c.Id_client,ville, heure ); //Je pense que sa marche 
         }
     }
 }
