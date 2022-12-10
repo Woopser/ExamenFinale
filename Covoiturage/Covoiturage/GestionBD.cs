@@ -23,7 +23,7 @@ namespace Covoiturage
         Chauffeur utilChauf = null;
         ObservableCollection<string> ville = null; //Mettre les villes prise en charges
 
-        internal ObservableCollection<string> Ville { get => ville;}
+        internal ObservableCollection<string> Ville { get => ville; set => ville = value; }
         internal Compte Utilisateur { get => utilisateur; set => utilisateur = value; }
         internal Client UtilCli { get => utilCli; set => utilCli = value; }
         internal Chauffeur UtilChauf { get => utilChauf; set => utilChauf = value; }
@@ -506,7 +506,7 @@ namespace Covoiturage
                 }
             r.Close();
             con.Close();
-            ville = liste;
+            //ville = liste;
             return liste;
         }
 
