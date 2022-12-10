@@ -85,6 +85,9 @@ namespace Covoiturage
                 case "Login":
                     mainFrame.Navigate(typeof(login));
                     break;
+                case "Ville":
+                    mainFrame.Navigate(typeof(AjoutArret));
+                    break;
                 default:
                     break;
             }

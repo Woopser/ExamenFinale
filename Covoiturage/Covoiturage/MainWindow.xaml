@@ -24,8 +24,8 @@
             <NavigationViewItemSeparator />
             
             <NavigationViewItem Content="Login" Icon="Folder" Tag="Login"  Foreground="Firebrick" />
-            <!--<NavigationViewItem Content="Agenda" Icon="Calendar"  Foreground="Firebrick"/>Bolbofjfgjg
-            <NavigationViewItemSeparator/>
+            <NavigationViewItem Content="AJouter une ville" Icon="Add" Tag="Ville" Foreground="Firebrick"/>
+            <NavigationViewItemSeparator/><!--
             <NavigationViewItemHeader Content="Zone 2"  Foreground="Firebrick"/>
             <NavigationViewItem Content="Commandes" Icon="Shop"  Foreground="Firebrick"/>
             <NavigationViewItem Content="Jeux Video" Icon="Keyboard"  Foreground="Firebrick"/>

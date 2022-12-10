@@ -21,17 +21,25 @@ namespace Covoiturage
         Compte utilisateur = null;
         Client utilCli = null;
         Chauffeur utilChauf = null;
+        ObservableCollection<string> ville = null; //Mettre les villes prise en charges
 
-
+        internal ObservableCollection<string> Ville { get => ville;}
         internal Compte Utilisateur { get => utilisateur; set => utilisateur = value; }
         internal Client UtilCli { get => utilCli; set => utilCli = value; }
         internal Chauffeur UtilChauf { get => utilChauf; set => utilChauf = value; }
 
 
-
         public GestionBD()
         {
             this.con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2022_420326ri_eq4;Uid=2046711;Pwd=2046711");
+            Ville.Add("Batiscan");
+            Ville.Add("La Tuque");
+            Ville.Add("Louiseville");
+            Ville.Add("Maskinonge");
+            Ville.Add("Mekinac");
+            Ville.Add("St-Tite");
+            Ville.Add("Shawinigan");
+            Ville.Add("Trois-Rivieres");
         }
 
         //Pour aller chercher l'instance (a utilisé avant chaque autre fonction de gestionBD)
@@ -498,7 +506,7 @@ namespace Covoiturage
                 }
             r.Close();
             con.Close();
-
+            ville = liste;
             return liste;
         }
 
@@ -811,6 +819,37 @@ namespace Covoiturage
         public void onCheck()
         {
             //pas finis, peut etre inutile NE PAS SUPPRIMER
+        }
+
+        //Fonction pour trajet en cours mais pas finis
+        public ObservableCollection<Trajet> getTrajEnCour()
+        {
+            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from trajet WHERE estFini = false";
+
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                Trajet t = new Trajet()
+                {
+                    Id_trajet = r.GetInt32("id_trajet"),
+                    Id_chauffeur = r.GetInt32("id_chauffeur"),
+                    PlaceDisp = r.GetInt32("place_disp"),
+                    VilleDep = r.GetString("ville_dep"),
+                    VilleArr = r.GetString("ville_arr"),
+                    HeureDep = r.GetInt32("heureDep"),
+                    HeureArr = r.GetInt32("heureArr")
+                };
+                liste.Add(t);
+            }
+            r.Close();
+            con.Close();
+
+            return liste;
         }
 
         //Code pour crypter mes mots de passe CRYPTE EN HASH, N'EST PAS D'ÉCRYPTABLE
