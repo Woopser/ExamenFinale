@@ -29,6 +29,9 @@
             
             <NavigationViewItemSeparator/>
             <NavigationViewItem Content="Vue Administrateur" Icon="Add" Tag="AdView" Foreground="Firebrick"/>
+
+            <NavigationViewItemSeparator/>
+            <NavigationViewItem Content="Historique des trajets" Icon="Add" Tag="AdView" Foreground="Firebrick"/>
             <!--
             <NavigationViewItemHeader Content="Zone 2"  Foreground="Firebrick"/>
             <NavigationViewItem Content="Commandes" Icon="Shop"  Foreground="Firebrick"/>

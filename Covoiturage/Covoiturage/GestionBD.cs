@@ -695,6 +695,38 @@ namespace Covoiturage
             return liste;
         }
 
+        //Get trajet avec un id
+        public ObservableCollection<Trajet> getTrajetsId(int id)
+        {
+            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from trajet WHERE id_chauffeur LIKE @id";
+
+            commande.Parameters.AddWithValue("@id", id);
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                Trajet t = new Trajet()
+                {
+                    Id_trajet = r.GetInt32("id_trajet"),
+                    Id_chauffeur = r.GetInt32("id_chauffeur"),
+                    PlaceDisp = r.GetInt32("place_disp"),
+                    VilleDep = r.GetString("ville_dep"),
+                    VilleArr = r.GetString("ville_arr"),
+                    HeureDep = r.GetInt32("heureDep"),
+                    HeureArr = r.GetInt32("heureArr")
+                };
+                liste.Add(t);
+            }
+            r.Close();
+            con.Close();
+
+            return liste;
+        }
+
         // Demander les trajets avec ville, heure et date
         public ObservableCollection<Trajet> getTrajetsVHD(string ville, int heure, DateTime date)
         {

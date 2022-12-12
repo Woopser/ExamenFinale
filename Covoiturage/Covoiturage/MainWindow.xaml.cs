@@ -94,6 +94,9 @@ namespace Covoiturage
                 case "Commencer un trajet":
                     mainFrame.Navigate(typeof(AjoutTraj));
                     break;
+                case "Historique des trajets":
+                    mainFrame.Navigate(typeof(Historique));
+                    break; 
                 default:
                     break;
             }
