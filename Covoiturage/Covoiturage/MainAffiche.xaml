@@ -45,6 +45,7 @@
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
                                 <TextBlock Text="Places disponibles :" FontSize="20"/>
                                 <TextBlock Text="{x:Bind PlaceDisp}"  Margin="10,0,0,0" FontSize="20"/>
+                                
                             </StackPanel>
                         </StackPanel>
                     </Grid>

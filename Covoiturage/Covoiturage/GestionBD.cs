@@ -313,6 +313,16 @@ namespace Covoiturage
 
                     return utilisateur;
                 }
+
+                if(utilisateur.Type_compte == "Administrateur")
+                {
+                    navVueAdmin.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+                    histo.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    ajtraj.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    ajVille.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+
+                    return utilisateur;
+                }
                
                 r.Close();
                 con.Close();
@@ -597,7 +607,7 @@ namespace Covoiturage
             commande.CommandText = "SELECT * FROM compte WHERE nom_utilisateur LIKE @nomU";
 
             commande.Parameters.AddWithValue("@nomU", nomU);
-
+            con.Close();
             con.Open();
             MySqlDataReader r = commande.ExecuteReader();
 
