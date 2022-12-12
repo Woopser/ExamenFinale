@@ -88,6 +88,9 @@ namespace Covoiturage
                 case "Ville":
                     mainFrame.Navigate(typeof(AjoutArret));
                     break;
+                case "Vue Administrateur":
+                    mainFrame.Navigate(typeof(AdminAffiche));
+                    break;
                 default:
                     break;
             }

@@ -15,6 +15,7 @@ namespace Covoiturage
         string villeArr;
         int heureDep;
         int heureArr;
+        DateTime journee;
         int estFini;
 
         public int Id_trajet { get => id_trajet; set => id_trajet = value; }
@@ -25,6 +26,7 @@ namespace Covoiturage
         public int HeureDep { get => heureDep; set => heureDep = value; }
         public int HeureArr { get => heureArr; set => heureArr = value; }
         public int EstFini { get => estFini; set => estFini = value; }
+        public DateTime Journee { get => journee; set => journee = value; }
 
     }
 }

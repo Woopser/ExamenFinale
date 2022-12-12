@@ -131,7 +131,9 @@ namespace Covoiturage
 
         private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
-            GestionBD.getInstance().AjoutArret(lvTrajets.SelectedIndex, c.Id_client,ville, heure ); //Je pense que sa marche 
+            
+            GestionBD.getInstance().AjoutArret((lvTrajets.SelectedIndex + 2), c.Id_client,ville, heure );
+            Frame.Navigate(typeof(MainAffiche));
         }
     }
 }

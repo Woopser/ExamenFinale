@@ -11,6 +11,7 @@ using System.Linq.Expressions;
 using System.Runtime.Intrinsics.Arm;
 using Microsoft.UI.Xaml.Controls;
 using System.Runtime.Intrinsics.X86;
+using MySqlX.XDevAPI;
 
 namespace Covoiturage
 {
@@ -32,17 +33,11 @@ namespace Covoiturage
         public GestionBD()
         {
             this.con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2022_420326ri_eq4;Uid=2046711;Pwd=2046711");
-            Ville.Add("Batiscan");
-            Ville.Add("La Tuque");
-            Ville.Add("Louiseville");
-            Ville.Add("Maskinonge");
-            Ville.Add("Mekinac");
-            Ville.Add("St-Tite");
-            Ville.Add("Shawinigan");
-            Ville.Add("Trois-Rivieres");
         }
 
-        //Pour aller chercher l'instance (a utilisé avant chaque autre fonction de gestionBD)
+
+
+        //Pour aller chffffercher l'instance (a utilisé avant chaque autre fonction de gestionBD)
         public static GestionBD getInstance()
         {
             if(gestionBD == null)
@@ -77,6 +72,98 @@ namespace Covoiturage
             r.Close();
             con.Close();
             return liste;
+        }
+
+        //Get session
+        public ObservableCollection<Session> getSession()
+        {
+            ObservableCollection<Session> liste = new ObservableCollection<Session>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from session";
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                Session t = new Session()
+                {
+                    Id_journee = r.GetInt32("id_journee"),
+                    Id_facture = r.GetInt32("id_facture"),
+                    Total = r.GetDouble("total"),
+                    Profit = r.GetDouble("profit"),
+                    Part_conducteur = r.GetDouble("part_conducteur")
+                };
+                liste.Add(t);
+            }
+            r.Close();
+            con.Close();
+            return liste;
+        }
+
+        //Get Facture
+        public ObservableCollection<Facture> getFacture()
+        {
+            ObservableCollection<Facture> liste = new ObservableCollection<Facture>();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from Facture";
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+                Facture t = new Facture()
+                {
+                    Id_facture = r.GetInt32("id_facture"),
+                    Id_trajet = r.GetInt32("id_trajet"),
+                    Montant = r.GetDouble("montant"),
+                };
+                liste.Add(t);
+            }
+            r.Close();
+            con.Close();
+            return liste;
+        }
+
+        //get un trajet pour une facture 
+        public Trajet trajFact(int id_traj)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from trajet WHERE facture.id_trajet LIKE trajet.@id_traj";
+
+            commande.Parameters.AddWithValue("@id_traj", id_traj);
+
+            con.Close();
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            if (r.Read())
+            {
+                Trajet c = new Trajet()
+                {
+                    Id_trajet = r.GetInt32("id_trajet"),
+                    Id_chauffeur = r.GetInt32("id_chauffeur"),
+                    PlaceDisp = r.GetInt32("place_disp"),
+                    VilleDep = r.GetString("ville_dep"),
+                    VilleArr = r.GetString("ville_arr"),
+                    HeureArr = r.GetInt32("heureDep"),
+                    HeureDep = r.GetInt32("heureArr"),
+                    Journee = r.GetDateTime("journee"),
+
+                };
+
+                r.Close();
+                con.Close();
+
+                return c;
+            }
+            else
+            {
+                con.Close();
+
+                return null;
+            }
         }
 
         //pour aller cherher les trajet dispo 
@@ -374,6 +461,28 @@ namespace Covoiturage
             commande.Parameters.AddWithValue("@id_cli", id_cli);
             commande.Parameters.AddWithValue("@vil", vil);
             commande.Parameters.AddWithValue("@heurArr", heurArr);
+
+
+            con.Open();
+            commande.Prepare();
+            commande.ExecuteNonQuery();
+            con.Close();
+        }
+
+        //AJout d'un trajet 
+        public void AjoutTraj( int id_chauf, int placeDisp, string vilDep, string vilArr, int heurDep, int heurArr, string date) 
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "INSERT INTO trajet (id_chauf,place_disp,ville_dep, ville_arr, heureDep, heureArr, journee, estFini) VALUES (@id_chauf,@placeDisp,@vilDep,@vilArr,@heurDep,@heurArr,@date, 0)";
+
+            commande.Parameters.AddWithValue("@id_chauf", id_chauf);
+            commande.Parameters.AddWithValue("@placeDisp", placeDisp);
+            commande.Parameters.AddWithValue("@vilDep", vilDep);
+            commande.Parameters.AddWithValue("@vilArr", vilArr);
+            commande.Parameters.AddWithValue("@HeurDep", heurDep);
+            commande.Parameters.AddWithValue("@heurArr", heurArr);
+            commande.Parameters.AddWithValue("@journee", date);
 
 
             con.Open();
