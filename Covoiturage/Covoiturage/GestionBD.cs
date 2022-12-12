@@ -727,6 +727,8 @@ namespace Covoiturage
             return liste;
         }
 
+        //Aller chercher les pour les trajets
+
         // Demander les trajets avec ville, heure et date
         public ObservableCollection<Trajet> getTrajetsVHD(string ville, int heure, DateTime date)
         {
