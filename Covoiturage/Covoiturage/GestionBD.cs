@@ -636,7 +636,7 @@ namespace Covoiturage
 
             MySqlCommand commande = new MySqlCommand();
             commande.Connection = con;
-            commande.CommandText = "SELECT DISTINCT ville_dep FROM trajet";
+            commande.CommandText = "SELECT * FROM ville";
 
             con.Open();
                 MySqlDataReader r = commande.ExecuteReader();
@@ -650,6 +650,21 @@ namespace Covoiturage
             con.Close();
             //ville = liste;
             return liste;
+        }
+
+        //Ajout de ville 
+        public void ajouVille(string vil)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "INSERT INTO arret (nom_ville) VALUES (@vil)";
+
+            commande.Parameters.AddWithValue("@vil", vil);
+
+            con.Open();
+            commande.Prepare();
+            commande.ExecuteNonQuery();
+            con.Close();
         }
 
         // Avoir toute les heures disponibles
