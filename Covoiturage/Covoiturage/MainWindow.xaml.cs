@@ -37,8 +37,12 @@ namespace Covoiturage
         public MainWindow()
         {
             this.InitializeComponent();
+            GestionBD.getInstance().NavVueAdmin = navVueAdmin;
+            GestionBD.getInstance().Histo = histo;
+            GestionBD.getInstance().Ajtraj = ajTraj;
+            GestionBD.getInstance().AjVille = ajVille;
 
-            mainFrame.Navigate(typeof(login));
+            mainFrame.Navigate(typeof(MainAffiche));
 
             Compte c = GestionBD.getInstance().Utilisateur;
             /*if (c != null)
@@ -96,7 +100,18 @@ namespace Covoiturage
                     break;
                 case "Historique des trajets":
                     mainFrame.Navigate(typeof(Historique));
-                    break; 
+                    break;
+                case "Se déconnecter":
+                    GestionBD.getInstance().Utilisateur = null;
+                    GestionBD.getInstance().UtilCli = null;
+                    GestionBD.getInstance().UtilChauf = null;
+                    mainFrame.Navigate(typeof(login));
+                    navVueAdmin.Visibility = Visibility.Collapsed;
+                    histo.Visibility = Visibility.Collapsed;
+                    ajTraj.Visibility = Visibility.Collapsed;
+                    ajVille.Visibility = Visibility.Collapsed;
+                    break;
+                       
                 default:
                     break;
             }

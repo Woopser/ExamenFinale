@@ -13,25 +13,24 @@
             <NavigationViewItemHeader Content="Uber Go"  Foreground="Firebrick"/>
             
             <NavigationViewItemSeparator />
-            
-            <NavigationViewItem Content="Trajet" Icon="Flag" Tag="Trajets"  Foreground="Firebrick" />
-            <NavigationViewItem Content="Demander un arrêt" Icon="Flag" Tag="Trajets"  x:Name="Arret"  Foreground="Firebrick" />
+
+            <NavigationViewItem x:Name="navTrajet" Content="Trajet" Icon="Flag" Tag="Trajets"  Foreground="Firebrick" />
 
             <NavigationViewItemSeparator />
 
-            <NavigationViewItem Content="Commencer un trajet" Icon="Add" Tag="Trajets" x:Name="ComTraj"  Foreground="Firebrick" />
+            <NavigationViewItem x:Name="ajTraj" Visibility="Collapsed" Content="Commencer un trajet" Icon="Add" Tag="Trajets"  Foreground="Firebrick" />
 
             <NavigationViewItemSeparator />
             
             <NavigationViewItem Content="Login" Icon="Folder" Tag="Login"  Foreground="Firebrick" />
-            <NavigationViewItem Content="AJouter une ville" Icon="Add" Tag="Ville" Foreground="Firebrick"/>
+            <NavigationViewItem x:Name="ajVille" Visibility="Collapsed" Content="AJouter une ville" Icon="Add" Tag="Ville" Foreground="Firebrick"/>
             
             
             <NavigationViewItemSeparator/>
-            <NavigationViewItem Content="Vue Administrateur" Icon="Add" Tag="AdView" Foreground="Firebrick"/>
+            <NavigationViewItem x:Name="navVueAdmin" Visibility="Collapsed" Content="Vue Administrateur" Icon="Add" Tag="AdView" Foreground="Firebrick"/>
 
             <NavigationViewItemSeparator/>
-            <NavigationViewItem Content="Historique des trajets" Icon="Add" Tag="AdView" Foreground="Firebrick"/>
+            <NavigationViewItem x:Name="histo" Visibility="Collapsed" Content="Historique des trajets" Icon="Add" Tag="AdView" Foreground="Firebrick"/>
             <!--
             <NavigationViewItemHeader Content="Zone 2"  Foreground="Firebrick"/>
             <NavigationViewItem Content="Commandes" Icon="Shop"  Foreground="Firebrick"/>

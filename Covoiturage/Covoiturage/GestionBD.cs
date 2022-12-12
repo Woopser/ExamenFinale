@@ -24,10 +24,20 @@ namespace Covoiturage
         Chauffeur utilChauf = null;
         ObservableCollection<string> ville = null; //Mettre les villes prise en charges
 
+        NavigationViewItem navVueAdmin;
+        NavigationViewItem histo;
+        NavigationViewItem ajtraj;
+        NavigationViewItem ajVille;
+
         internal ObservableCollection<string> Ville { get => ville; set => ville = value; }
         internal Compte Utilisateur { get => utilisateur; set => utilisateur = value; }
         internal Client UtilCli { get => utilCli; set => utilCli = value; }
         internal Chauffeur UtilChauf { get => utilChauf; set => utilChauf = value; }
+        public NavigationViewItem NavVueAdmin { get => navVueAdmin; set => navVueAdmin = value; }
+        public NavigationViewItem Histo { get => histo; set => histo = value; }
+        public NavigationViewItem Ajtraj { get => ajtraj; set => ajtraj = value; }
+        public NavigationViewItem AjVille { get => ajVille; set => ajVille = value; }
+
 
 
         public GestionBD()
@@ -282,6 +292,11 @@ namespace Covoiturage
                     UtilCli = getClientSeul(utilisateur.id_compte);
 
                     con.Close();
+                    navVueAdmin.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    histo.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    ajtraj.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    ajVille.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+
 
                     return utilisateur;
                 }
@@ -291,6 +306,10 @@ namespace Covoiturage
                     utilChauf = getChauffeurSeul(utilisateur.id_compte);
 
                     con.Close();
+                    navVueAdmin.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    histo.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+                    ajtraj.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+                    ajVille.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
 
                     return utilisateur;
                 }
@@ -304,6 +323,10 @@ namespace Covoiturage
             {               
                 r.Close();
                 con.Close();
+                navVueAdmin.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+                histo.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                ajtraj.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                ajVille.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
 
                 return null;   
             }

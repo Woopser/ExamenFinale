@@ -26,15 +26,23 @@ namespace Covoiturage
     /// </summary>
     public sealed partial class AdminAffiche : Page
     {
+
+        string date;
         public AdminAffiche()
         {
             this.InitializeComponent();
             lvTraj.ItemsSource = GestionBD.getInstance().getSession();
+            cbDate.ItemsSource = GestionBD.getInstance().GetDates();
         }
 
         private void lvTraj_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+           
+        }
+
+        private void cbDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            date = cbDate.Text;
         }
     }
 }

@@ -13,6 +13,9 @@
 
     <StackPanel>
 
+        <TextBlock Text="Quelle date voulez vous voir?" />
+        <ComboBox x:Name="cbDate" SelectionChanged="cbDate_SelectionChanged" />
+
         <ListView x:Name="lvTraj" SelectionChanged="lvTraj_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Session">
