@@ -36,7 +36,6 @@ namespace Covoiturage
             this.InitializeComponent();
             VilleDep.ItemsSource = GestionBD.getInstance().GetVilles();
             VilleArr.ItemsSource = GestionBD.getInstance().GetVilles();
-            cbDate.ItemsSource = GestionBD.getInstance().GetDates();
         }
 
         private void VilleDep_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -49,14 +48,11 @@ namespace Covoiturage
             dateArr = VilleArr.SelectedItem.ToString();
         }
 
-        private void cbDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            journ = cbDate.SelectedItem.ToString();
-        }
 
         private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
-            GestionBD.getInstance().AjoutTraj(c.Id_chauffeur, Int32.Parse(place.Text), dateDep, dateArr,Int32.Parse(heureD.Text), Int32.Parse(heureA.Text), journ);
+            GestionBD.getInstance().AjoutTraj(c.Id_chauffeur, Int32.Parse(place.Text), dateDep, dateArr,Int32.Parse(heureD.Text), Int32.Parse(heureA.Text), journee.Text);
+            Frame.Navigate(typeof(MainAffiche));
         }
     }
 }

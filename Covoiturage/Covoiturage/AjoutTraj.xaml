@@ -38,8 +38,8 @@
             <ComboBox x:Name="VilleArr" SelectionChanged="VilleArr_SelectionChanged" />
         </StackPanel>
 
-        <TextBlock Text="À quelle date voulez-vous partir?" />
-        <ComboBox x:Name="cbDate" SelectionChanged="cbDate_SelectionChanged" />
+        <TextBlock Text="À quelle date voulez-vous partir? (Annemoisjour ex: 20221205" />
+        <TextBox x:Name="journee" />
 
         <Button x:Name="btnAjouter" Click="btnAjouter_Click" />
 
