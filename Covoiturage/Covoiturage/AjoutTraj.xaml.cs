@@ -26,9 +26,37 @@ namespace Covoiturage
     /// </summary>
     public sealed partial class AjoutTraj : Page
     {
+        string dateDep;
+        string dateArr;
+        string journ;
+        Chauffeur c = GestionBD.getInstance().UtilChauf;
+
         public AjoutTraj()
         {
             this.InitializeComponent();
+            VilleDep.ItemsSource = GestionBD.getInstance().GetVilles();
+            VilleArr.ItemsSource = GestionBD.getInstance().GetVilles();
+            cbDate.ItemsSource = GestionBD.getInstance().GetDates();
+        }
+
+        private void VilleDep_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dateDep = VilleDep.SelectedItem.ToString();
+        }
+
+        private void VilleArr_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dateArr = VilleArr.SelectedItem.ToString();
+        }
+
+        private void cbDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            journ = cbDate.SelectedItem.ToString();
+        }
+
+        private void btnAjouter_Click(object sender, RoutedEventArgs e)
+        {
+            GestionBD.getInstance().AjoutTraj(c.Id_chauffeur, Int32.Parse(place.Text), dateDep, dateArr,Int32.Parse(heureD.Text), Int32.Parse(heureA.Text), journ);
         }
     }
 }

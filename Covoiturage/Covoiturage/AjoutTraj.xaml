@@ -15,8 +15,33 @@
 
         <StackPanel>
             <TextBlock >Entrer l'heure de depart du trajet</TextBlock>
-            <TextBox x:Name="nomU" />
+            <TextBox x:Name="heureD" />
         </StackPanel>
+
+        <StackPanel>
+            <TextBlock >Entrer l'heure d'arrive du trajet</TextBlock>
+            <TextBox x:Name="heureA" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock >Entrer le nombre de place dispo</TextBlock>
+            <TextBox x:Name="place" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock Text="De quelle ville partez-vous?" />
+            <ComboBox x:Name="VilleDep" SelectionChanged="VilleDep_SelectionChanged" />
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock Text="De quelle ville allez vous aller?" />
+            <ComboBox x:Name="VilleArr" SelectionChanged="VilleArr_SelectionChanged" />
+        </StackPanel>
+
+        <TextBlock Text="À quelle date voulez-vous partir?" />
+        <ComboBox x:Name="cbDate" SelectionChanged="cbDate_SelectionChanged" />
+
+        <Button x:Name="btnAjouter" Click="btnAjouter_Click" />
 
     </StackPanel>
 </Page>

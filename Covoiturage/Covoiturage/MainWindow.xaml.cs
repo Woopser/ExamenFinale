@@ -91,6 +91,9 @@ namespace Covoiturage
                 case "Vue Administrateur":
                     mainFrame.Navigate(typeof(AdminAffiche));
                     break;
+                case "Commencer un trajet":
+                    mainFrame.Navigate(typeof(AjoutTraj));
+                    break;
                 default:
                     break;
             }

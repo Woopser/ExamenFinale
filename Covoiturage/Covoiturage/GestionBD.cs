@@ -474,7 +474,7 @@ namespace Covoiturage
         {
             MySqlCommand commande = new MySqlCommand();
             commande.Connection = con;
-            commande.CommandText = "INSERT INTO trajet (id_chauf,place_disp,ville_dep, ville_arr, heureDep, heureArr, journee, estFini) VALUES (@id_chauf,@placeDisp,@vilDep,@vilArr,@heurDep,@heurArr,@date, 0)";
+            commande.CommandText = "INSERT INTO trajet (id_chauffeur,place_disp,ville_dep, ville_arr, heureDep, heureArr, journee, estFini) VALUES (@id_chauf,@placeDisp,@vilDep,@vilArr,@heurDep,@heurArr,@date, 0)";
 
             commande.Parameters.AddWithValue("@id_chauf", id_chauf);
             commande.Parameters.AddWithValue("@placeDisp", placeDisp);
@@ -482,7 +482,7 @@ namespace Covoiturage
             commande.Parameters.AddWithValue("@vilArr", vilArr);
             commande.Parameters.AddWithValue("@HeurDep", heurDep);
             commande.Parameters.AddWithValue("@heurArr", heurArr);
-            commande.Parameters.AddWithValue("@journee", date);
+            commande.Parameters.AddWithValue("@date", date);
 
 
             con.Open();
