@@ -506,7 +506,7 @@ namespace Covoiturage
         }
 
         //AJout d'un trajet 
-        public void AjoutTraj( int id_chauf, int placeDisp, string vilDep, string vilArr, int heurDep, int heurArr,string arret, string date) 
+        public void AjoutTraj( int id_chauf, int placeDisp, string vilDep, string villeArret,  string vilArr, int heurDep, int heurArr,string arret, string date) 
         {
             MySqlCommand commande = new MySqlCommand();
             commande.Connection = con;

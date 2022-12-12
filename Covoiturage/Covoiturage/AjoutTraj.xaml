@@ -38,6 +38,11 @@
             <ComboBox x:Name="VilleArr" SelectionChanged="VilleArr_SelectionChanged" />
         </StackPanel>
 
+        <StackPanel>
+            <TextBlock Text="À quelle ville faites vous un arrêt" />
+            <ComboBox x:Name="VilleArret" SelectionChanged="VilleArret_SelectionChanged" />
+        </StackPanel>
+
         <TextBlock Text="À quelle date voulez-vous partir? (Annemoisjour ex: 20221205)" />
         <TextBox x:Name="journee" />
 
