@@ -73,6 +73,7 @@ namespace Covoiturage
                     Id_chauffeur = r.GetInt32("id_chauffeur"),
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
+                    Arret = r.GetString("arret"),
                     VilleArr = r.GetString("ville_arr"),
                     HeureDep = r.GetInt32("heureDep"),
                     HeureArr = r.GetInt32("heureArr")
@@ -157,6 +158,7 @@ namespace Covoiturage
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
+                    Arret = r.GetString("arret"),
                     HeureArr = r.GetInt32("heureDep"),
                     HeureDep = r.GetInt32("heureArr"),
                     Journee = r.GetDateTime("journee"),
@@ -195,6 +197,7 @@ namespace Covoiturage
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
+                    Arret = r.GetString("arret"),
                     HeureDep = r.GetInt32("heureDep"),
                     HeureArr = r.GetInt32("heureArr")
                 };
@@ -503,11 +506,11 @@ namespace Covoiturage
         }
 
         //AJout d'un trajet 
-        public void AjoutTraj( int id_chauf, int placeDisp, string vilDep, string vilArr, int heurDep, int heurArr, string date) 
+        public void AjoutTraj( int id_chauf, int placeDisp, string vilDep, string vilArr, int heurDep, int heurArr,string arret, string date) 
         {
             MySqlCommand commande = new MySqlCommand();
             commande.Connection = con;
-            commande.CommandText = "INSERT INTO trajet (id_chauffeur,place_disp,ville_dep, ville_arr, heureDep, heureArr, journee, estFini) VALUES (@id_chauf,@placeDisp,@vilDep,@vilArr,@heurDep,@heurArr,@date, 0)";
+            commande.CommandText = "INSERT INTO trajet (id_chauffeur,place_disp,ville_dep, ville_arr, heureDep, heureArr,arret, journee, estFini) VALUES (@id_chauf,@placeDisp,@vilDep,@vilArr,@heurDep,@heurArr,@arret,@date, 0)";
 
             commande.Parameters.AddWithValue("@id_chauf", id_chauf);
             commande.Parameters.AddWithValue("@placeDisp", placeDisp);
@@ -515,6 +518,7 @@ namespace Covoiturage
             commande.Parameters.AddWithValue("@vilArr", vilArr);
             commande.Parameters.AddWithValue("@HeurDep", heurDep);
             commande.Parameters.AddWithValue("@heurArr", heurArr);
+            commande.Parameters.AddWithValue("@arret", arret);
             commande.Parameters.AddWithValue("@date", date);
 
 

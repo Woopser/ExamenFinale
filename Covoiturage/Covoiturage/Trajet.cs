@@ -13,6 +13,7 @@ namespace Covoiturage
         int placeDisp;
         string villeDep;
         string villeArr;
+        string arret;
         int heureDep;
         int heureArr;
         DateTime journee;
@@ -23,6 +24,7 @@ namespace Covoiturage
         public int PlaceDisp { get => placeDisp; set => placeDisp = value; }
         public string VilleDep { get => villeDep; set => villeDep = value; }
         public string VilleArr { get => villeArr; set => villeArr = value; }
+        public string Arret { get=> arret; set=> arret = value;}
         public int HeureDep { get => heureDep; set => heureDep = value; }
         public int HeureArr { get => heureArr; set => heureArr = value; }
         public int EstFini { get => estFini; set => estFini = value; }
