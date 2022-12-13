@@ -317,7 +317,7 @@ namespace Covoiturage
                     return utilisateur;
                 }
 
-                if(utilisateur.Type_compte == "Administrateur")
+                if(utilisateur.Type_compte == "Admin")
                 {
                     navVueAdmin.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
                     histo.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
@@ -464,11 +464,11 @@ namespace Covoiturage
         }
 
         //Ajout de client
-        public void AjoutCli(int id_com, string pre, string nom, string adres, string tele, string email, string villeDep, string villeArr)
+        public void AjoutCli(int id_com, string pre, string nom, string adres, string tele, string email, string villeDep)
         {
             MySqlCommand commande = new MySqlCommand();
             commande.Connection = con;
-            commande.CommandText = "INSERT INTO client (id_compte,prenom,nom,adresse,email,no_telephone,ville_dep, ville_arr) VALUES (@id_com,@pre,@nom,@adres,@email,@tele,@villeDep, @villeArr)";
+            commande.CommandText = "INSERT INTO client (id_compte,prenom,nom,adresse,email,no_telephone,ville_dep, ville_arr) VALUES (@id_com,@pre,@nom,@adres,@email,@tele,@villeDep)";
 
             commande.Parameters.AddWithValue("@id_com", id_com);
             commande.Parameters.AddWithValue("@pre", pre);
@@ -477,7 +477,6 @@ namespace Covoiturage
             commande.Parameters.AddWithValue("@tele", tele);
             commande.Parameters.AddWithValue("@email", email);
             commande.Parameters.AddWithValue("@villeDep", villeDep);
-            commande.Parameters.AddWithValue("@villeArr", villeArr);
 
 
             con.Open();

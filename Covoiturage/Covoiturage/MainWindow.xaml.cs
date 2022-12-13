@@ -111,6 +111,7 @@ namespace Covoiturage
                     histo.Visibility = Visibility.Collapsed;
                     ajTraj.Visibility = Visibility.Collapsed;
                     ajVille.Visibility = Visibility.Collapsed;
+                    ajArr.Visibility = Visibility.Collapsed;
                     break;
                        
                 default:
