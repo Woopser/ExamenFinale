@@ -23,7 +23,7 @@
             </ComboBox>
 
             <TextBlock Text="À quelle date voulez-vous partir?" />
-            <ComboBox x:Name="cbDate" SelectionChanged="cbDate_SelectionChanged" />
+            <CalendarDatePicker x:Name="calendar" DateChanged="calendar_DateChanged"/>
 
             <Button x:Name="btnConfirmer" Content="Confirmer" Click="btnConfirmer_Click" />
         </StackPanel>
@@ -69,7 +69,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button x:Name="btnAjouter" Click="btnAjouter_Click" />
+            <Button x:Name="btnAjouter" Click="btnAjouter_Click" Content="Ajouter"/>
         </StackPanel>
     </StackPanel>
 </Page>

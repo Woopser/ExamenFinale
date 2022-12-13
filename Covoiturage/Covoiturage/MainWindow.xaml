@@ -22,7 +22,7 @@
 
             <NavigationViewItemSeparator />
 
-            <NavigationViewItem x:Name="ajArr" Visibility="Collapsed" Content="Demander un arret" Icon="Add" Tag="Trajets"  Foreground="Firebrick" />
+            <NavigationViewItem x:Name="ajArr" Visibility="Collapsed" Content="Demander un arrêt" Icon="Add" Tag="Trajets"  Foreground="Firebrick" />
 
             <NavigationViewItemSeparator />
             
