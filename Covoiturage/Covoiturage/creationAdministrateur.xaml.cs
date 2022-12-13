@@ -23,6 +23,8 @@ namespace Covoiturage
     /// </summary>
     public sealed partial class creationAdministrateur : Page
     {
+
+        bool valide = true;
         public creationAdministrateur()
         {
             this.InitializeComponent();
@@ -30,8 +32,24 @@ namespace Covoiturage
 
         private void btAjout_Click(object sender, RoutedEventArgs e)
         {
-            GestionBD.getInstance().AjoutCompte(nomU.Text, Mdp.Text, "Administrateur");
-            Frame.Navigate(typeof(login));
+            if (nomU.Text == "")
+            {
+                error.Text += " Veuillez entrer un nom d'utilisateur. ";
+                valide = false;
+            }
+            if (Mdp.Text == "")
+            {
+                error.Text += " Veuillez entrer un mot de passe. ";
+                valide = false;
+            }
+
+
+
+            if (valide)
+            {
+                GestionBD.getInstance().AjoutCompte(nomU.Text, Mdp.Text, "Administrateur");
+                Frame.Navigate(typeof(login));
+            }
         }
     }
 }

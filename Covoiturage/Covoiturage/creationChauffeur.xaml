@@ -9,6 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel>
+        <TextBlock x:Name="error"></TextBlock>
 
         <StackPanel>
             <TextBlock >Entrer un nom d'utilisateur</TextBlock>
@@ -45,11 +46,12 @@
         </StackPanel>
         
         <!--Changer sa en combobox si le temps le permet-->
-        <StackPanel>
-            <TextBlock >Entrer votre type de voiture</TextBlock>
-            <TextBox x:Name="voiture" />
-        </StackPanel>
-        
+        <TextBlock >Entrer votre type de voiture</TextBlock>
+        <ComboBox x:Name="voiture" SelectionChanged="voiture_SelectionChanged">
+            <x:String>VUS</x:String>
+            <x:String>Berline</x:String>
+        </ComboBox>
+
         <StackPanel>
             <Button x:Name="Submit" Click="Submit_Click" >Confirmer</Button>
         </StackPanel>

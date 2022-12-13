@@ -10,6 +10,8 @@
 
     <StackPanel>
 
+        <TextBlock x:Name="error" ></TextBlock>
+
         <StackPanel>
             <TextBlock >Entrer un nom d'utilisateur</TextBlock>
             <TextBox x:Name="nomU" />
@@ -49,10 +51,6 @@
             <TextBox x:Name="villeDep" />
         </StackPanel>
 
-        <StackPanel>
-            <TextBlock >Entrer votre ville d'arrivée</TextBlock>
-            <TextBox x:Name="villeArr" />
-        </StackPanel>
 
         <StackPanel>
             <Button x:Name="Submit" Click="Submit_Click" >Confirmer</Button>

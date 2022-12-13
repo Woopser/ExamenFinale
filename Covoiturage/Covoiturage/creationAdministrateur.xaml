@@ -9,6 +9,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel>
+
+        <TextBlock x:Name="error"></TextBlock>
+
         <StackPanel>
             <TextBlock >Entrer un nom d'utilisateur</TextBlock>
             <TextBox x:Name="nomU" />
