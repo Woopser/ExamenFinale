@@ -128,7 +128,7 @@ namespace Covoiturage
 
         private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
-            
+            GestionBD.getInstance().updatePlace(lvTrajets.SelectedIndex);//A changer comme l'autre d'en dessous, pour aller chercher l'id du trajet
             GestionBD.getInstance().AjoutArret((lvTrajets.SelectedIndex + 2), c.Id_client,ville);
             Frame.Navigate(typeof(MainAffiche));
         }

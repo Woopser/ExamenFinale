@@ -1040,6 +1040,20 @@ namespace Covoiturage
             return liste;
         }
 
+        public void updatePlace(int id_traj)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "UPDATE trajet SET (place_disp) = (place_disp - 1) WHERE  id_trajet LIKE @id_traj";
+
+            commande.Parameters.AddWithValue("@id_traj", id_traj);
+
+            con.Open();
+            commande.Prepare();
+            commande.ExecuteNonQuery();
+            con.Close();
+        }
+
         //Code pour crypter mes mots de passe CRYPTE EN HASH, N'EST PAS D'ÉCRYPTABLE
         /*
          * private string genererSHA256(string texte)

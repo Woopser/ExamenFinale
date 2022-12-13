@@ -12,10 +12,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel>
-        <StackPanel>
-            <TextBlock Text="Nombre de places disponibles" />
-            <TextBox x:Name="place" />
-        </StackPanel>
 
         <StackPanel>
             <TextBlock Text="De quelle ville partez-vous?" />

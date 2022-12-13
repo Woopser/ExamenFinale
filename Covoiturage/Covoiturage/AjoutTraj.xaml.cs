@@ -30,9 +30,11 @@ namespace Covoiturage
         string villeArr;
         string arret;
         DateTime dateDepart;
+        int place;
 
         Chauffeur c = GestionBD.getInstance().UtilChauf;
 
+        
         public AjoutTraj()
         {
             this.InitializeComponent();
@@ -59,7 +61,18 @@ namespace Covoiturage
 
         private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
-            GestionBD.getInstance().AjoutTraj(c.Id_chauffeur, Int32.Parse(place.Text), villeDep, villeArr, arret, dateDepart);
+
+            if(c.Voiture == "VUS")
+            {
+                place = 5;
+            }
+            else if(c.Voiture == "Berline")
+            {
+                place = 3;
+            }
+
+
+            GestionBD.getInstance().AjoutTraj(c.Id_chauffeur, place, villeDep, villeArr, arret, dateDepart);
             Frame.Navigate(typeof(MainAffiche));
         }
 
