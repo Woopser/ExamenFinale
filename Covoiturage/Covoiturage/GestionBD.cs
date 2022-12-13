@@ -29,6 +29,7 @@ namespace Covoiturage
         NavigationViewItem histo;
         NavigationViewItem ajtraj;
         NavigationViewItem ajVille;
+        NavigationViewItem ajArr;
 
         internal ObservableCollection<string> Ville { get => ville; set => ville = value; }
         internal Compte Utilisateur { get => utilisateur; set => utilisateur = value; }
@@ -38,6 +39,7 @@ namespace Covoiturage
         public NavigationViewItem Histo { get => histo; set => histo = value; }
         public NavigationViewItem Ajtraj { get => ajtraj; set => ajtraj = value; }
         public NavigationViewItem AjVille { get => ajVille; set => ajVille = value; }
+        public NavigationViewItem AjArr { get => ajArr; set => ajArr = value; }
 
 
 
@@ -295,6 +297,7 @@ namespace Covoiturage
                     histo.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
                     ajtraj.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
                     ajVille.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    ajArr.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
 
 
                     return utilisateur;
@@ -309,6 +312,7 @@ namespace Covoiturage
                     histo.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
                     ajtraj.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
                     ajVille.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
+                    ajArr.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
 
                     return utilisateur;
                 }
@@ -319,6 +323,7 @@ namespace Covoiturage
                     histo.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
                     ajtraj.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
                     ajVille.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
+                    ajArr.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
 
                     return utilisateur;
                 }

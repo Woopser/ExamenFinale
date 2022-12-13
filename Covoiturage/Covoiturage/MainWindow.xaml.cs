@@ -41,6 +41,7 @@ namespace Covoiturage
             GestionBD.getInstance().Histo = histo;
             GestionBD.getInstance().Ajtraj = ajTraj;
             GestionBD.getInstance().AjVille = ajVille;
+            GestionBD.getInstance().AjArr = ajArr;
 
             mainFrame.Navigate(typeof(MainAffiche));
 
