@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using WinRT;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -128,8 +129,9 @@ namespace Covoiturage
 
         private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
-            GestionBD.getInstance().updatePlace(lvTrajets.SelectedIndex);//A changer comme l'autre d'en dessous, pour aller chercher l'id du trajet
-            GestionBD.getInstance().AjoutArret((lvTrajets.SelectedIndex + 2), c.Id_client,ville);
+            Trajet t = lvTrajets.SelectedItem.As<Trajet>();
+            GestionBD.getInstance().updatePlace(t.Id_trajet);//A changer comme l'autre d'en dessous, pour aller chercher l'id du trajet
+            GestionBD.getInstance().AjoutArret(t.Id_trajet, c.Id_client,ville);
             Frame.Navigate(typeof(MainAffiche));
         }
 

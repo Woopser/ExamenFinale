@@ -1044,7 +1044,7 @@ namespace Covoiturage
         {
             MySqlCommand commande = new MySqlCommand();
             commande.Connection = con;
-            commande.CommandText = "UPDATE trajet SET (place_disp) = (place_disp - 1) WHERE  id_trajet LIKE @id_traj";
+            commande.CommandText = "UPDATE trajet SET place_disp = place_disp - 1 WHERE id_trajet = @id_traj;";
 
             commande.Parameters.AddWithValue("@id_traj", id_traj);
 

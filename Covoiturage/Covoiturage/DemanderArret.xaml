@@ -64,6 +64,8 @@
                                     <TextBlock Text="{x:Bind PlaceDisp}"  Margin="10,0,0,0" FontSize="20"/>
                                 </StackPanel>
                             </StackPanel>
+
+                            <TextBlock x:Name="hidden" Visibility="Collapsed" Text="{x:Bind Id_trajet}"></TextBlock>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
