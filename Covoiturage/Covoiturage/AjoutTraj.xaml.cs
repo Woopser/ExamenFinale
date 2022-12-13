@@ -28,8 +28,9 @@ namespace Covoiturage
     {
         string villeDep;
         string villeArr;
-        string villeArret;
-        string journ;
+        string arret;
+        DateTime dateDepart;
+
         Chauffeur c = GestionBD.getInstance().UtilChauf;
 
         public AjoutTraj()
@@ -37,6 +38,7 @@ namespace Covoiturage
             this.InitializeComponent();
             VilleDep.ItemsSource = GestionBD.getInstance().GetVilles();
             VilleArr.ItemsSource = GestionBD.getInstance().GetVilles();
+            VilleArret.ItemsSource = GestionBD.getInstance().GetVilles();
         }
 
         private void VilleDep_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -51,15 +53,19 @@ namespace Covoiturage
 
         private void VilleArret_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            villeArret = VilleArret.SelectedItem.ToString();
+            arret = VilleArret.SelectedItem.ToString();
         }
 
 
         private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
-            GestionBD.getInstance().AjoutTraj(c.Id_chauffeur, Int32.Parse(place.Text), villeDep, villeArret, villeArr, Int32.Parse(heureD.Text), Int32.Parse(heureA.Text));
+            GestionBD.getInstance().AjoutTraj(c.Id_chauffeur, Int32.Parse(place.Text), villeDep, villeArr, arret, dateDepart);
             Frame.Navigate(typeof(MainAffiche));
         }
 
+        private void calendar_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+        {
+            dateDepart = calendar.Date.Value.Date;
+        }
     }
 }

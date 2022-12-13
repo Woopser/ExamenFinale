@@ -16,7 +16,6 @@ namespace Covoiturage
         string email;
         string numero;
         string villeDep;
-        string villeArr;
 
         public int Id_client { get => id_client; set => id_client = value; }
         public int Id_compte { get => id_compte; set => id_compte = value; }
@@ -26,6 +25,5 @@ namespace Covoiturage
         public string Adresse { get => adresse; set => adresse = value; }
         public string Numero { get => numero; set => numero = value; }
         public string VilleDep { get => villeDep; set => villeDep = value; }
-        public string VilleArr { get => villeArr; set => villeArr = value; }
     }
 }

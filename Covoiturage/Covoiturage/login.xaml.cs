@@ -41,13 +41,15 @@ namespace Covoiturage
             {
                 string type = GestionBD.getInstance().GetTypeCompte(tbUser.Text);
 
-                if(type == "Administateur")
+                if(type == "Admin")
                 {
                     //Frame.Navigate(typeof(/*ENTRER PAGE ICI*/));
+                    Frame.Navigate(typeof(MainAffiche));
                 }
                 else if(type == "Chauffeur")
                 {
                     //Faut trouver le moyen de rafraichir la page MainWindow en ce login comme sa les choses vont se barrer si pas connecter
+                    Frame.Navigate(typeof(MainAffiche));
                 }
                 else if(type== "Client")
                 {
