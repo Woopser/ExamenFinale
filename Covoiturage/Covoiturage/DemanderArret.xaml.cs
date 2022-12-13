@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using WinRT;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -26,6 +27,7 @@ namespace Covoiturage
         string ville;
         int heure;
         DateTime date;
+        bool valide = true;
 
         Client c = GestionBD.getInstance().UtilCli;
         public DemanderArret()
@@ -63,33 +65,6 @@ namespace Covoiturage
         private void cbVille_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ville = cbVille.SelectedItem.ToString();
-           /* switch (sender)
-            {
-                case "Batiscan":
-                    ville = "Batiscan";
-                    break;
-                case "La Tuque":
-                    ville = "La Tuque";
-                    break;
-                case "Louiseville":
-                    ville = "Louiseville";
-                    break;
-                case "Maskinongé":
-                    ville = "Maskinongé";
-                    break;
-                case "Mékinac":
-                    ville = "Mékinac";
-                    break;
-                case "Saint-Tite":
-                    ville = "Saint-Tite";
-                    break;
-                case "Shawinigan":
-                    ville = "Shawinigan";
-                    break;
-                case "Trois-Rivières":
-                    ville = "Trois-Rivières";
-                    break;
-            }*/
         }
 
         
@@ -128,9 +103,19 @@ namespace Covoiturage
 
         private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
-            GestionBD.getInstance().updatePlace(lvTrajets.SelectedIndex);//A changer comme l'autre d'en dessous, pour aller chercher l'id du trajet
-            GestionBD.getInstance().AjoutArret((lvTrajets.SelectedIndex + 2), c.Id_client,ville);
-            Frame.Navigate(typeof(MainAffiche));
+            if(ville == null)
+            {
+                error.Text = "Vous devez choisir une ville";
+                valide = false;
+            }
+
+            if (valide)
+            {
+                Trajet t = lvTrajets.SelectedItem.As<Trajet>();
+                GestionBD.getInstance().updatePlace(t.Id_trajet);//A changer comme l'autre d'en dessous, pour aller chercher l'id du trajet
+                GestionBD.getInstance().AjoutArret(t.Id_trajet, c.Id_client, ville);
+                Frame.Navigate(typeof(MainAffiche));
+            }
         }
 
         private void calendar_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
