@@ -25,7 +25,7 @@ namespace Covoiturage
     {
         string ville;
         int heure;
-        string date;
+        DateTime date;
 
         Client c = GestionBD.getInstance().UtilCli;
         public DemanderArret()
@@ -33,7 +33,7 @@ namespace Covoiturage
             this.InitializeComponent();
 
             cbVille.ItemsSource = GestionBD.getInstance().GetVilles();
-            cbDate.ItemsSource = GestionBD.getInstance().GetDates();
+            
         }
 
         private void cbHeure_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -92,25 +92,22 @@ namespace Covoiturage
             }*/
         }
 
-        private void cbDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            date = cbDate.SelectedItem.ToString();
-        }
+        
 
         private void btnConfirmer_Click(object sender, RoutedEventArgs e)
         {
             spTrajets.Visibility = Visibility.Visible;
 
-            if (cbVille.SelectedIndex == -1 && cbHeure.SelectedIndex == -1 && cbDate.SelectedIndex == -1)
+            if (cbVille.SelectedIndex == -1 && cbHeure.SelectedIndex == -1 && date == DateTime.MinValue)
                 lvTrajets.ItemsSource = GestionBD.getInstance().getTrajets();
 
             else if (cbVille.SelectedIndex == -1 && cbHeure.SelectedIndex == -1)
                 lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsD(date);
 
-            else if (cbVille.SelectedIndex == -1 && cbDate.SelectedIndex == -1)
+            else if (cbVille.SelectedIndex == -1 && date == DateTime.MinValue)
                 lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsH(heure);
 
-            else if (cbDate.SelectedIndex == -1 && cbHeure.SelectedIndex == -1)
+            else if (date == DateTime.MinValue && cbHeure.SelectedIndex == -1)
                 lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsV(ville);
 
             else if (cbVille.SelectedIndex == -1)
@@ -119,21 +116,26 @@ namespace Covoiturage
             else if (cbHeure.SelectedIndex == -1)
                 lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVD(ville, date);
 
-            else if (cbDate.SelectedIndex == -1)
+            else if (date == DateTime.MinValue)
                 lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVH(ville, heure);
 
             else
             {
-                DateTime date1 = DateTime.Parse(date);
-                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVHD(ville, heure, date1);
+                
+                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVHD(ville, heure, date);
             }
         }
 
         private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
             
-            GestionBD.getInstance().AjoutArret((lvTrajets.SelectedIndex + 2), c.Id_client,ville, heure );
+            GestionBD.getInstance().AjoutArret((lvTrajets.SelectedIndex + 2), c.Id_client,ville);
             Frame.Navigate(typeof(MainAffiche));
+        }
+
+        private void calendar_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+        {
+            date = calendar.Date.Value.Date;
         }
     }
 }

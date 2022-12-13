@@ -32,7 +32,7 @@ namespace Covoiturage
         {
             this.InitializeComponent();
             lvTraj.ItemsSource = GestionBD.getInstance().getSession();
-            cbDate.ItemsSource = GestionBD.getInstance().GetDates();
+            //cbDate.ItemsSource = GestionBD.getInstance().GetDates();
         }
 
         private void lvTraj_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -42,7 +42,7 @@ namespace Covoiturage
 
         private void cbDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            date = cbDate.Text;
+            //date = cbDate.Text;
         }
     }
 }
