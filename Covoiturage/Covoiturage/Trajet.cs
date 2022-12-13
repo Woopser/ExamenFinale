@@ -14,9 +14,7 @@ namespace Covoiturage
         string villeDep;
         string villeArr;
         string arret;
-        int heureDep;
-        int heureArr;
-        DateTime journee;
+        DateTime dateDepart;
         int estFini;
 
         public int Id_trajet { get => id_trajet; set => id_trajet = value; }
@@ -25,10 +23,7 @@ namespace Covoiturage
         public string VilleDep { get => villeDep; set => villeDep = value; }
         public string VilleArr { get => villeArr; set => villeArr = value; }
         public string Arret { get=> arret; set=> arret = value;}
-        public int HeureDep { get => heureDep; set => heureDep = value; }
-        public int HeureArr { get => heureArr; set => heureArr = value; }
+        public DateTime DateDepart { get => dateDepart; set => dateDepart = value; }
         public int EstFini { get => estFini; set => estFini = value; }
-        public DateTime Journee { get => journee; set => journee = value; }
-
     }
 }

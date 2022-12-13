@@ -12,6 +12,7 @@ using System.Runtime.Intrinsics.Arm;
 using Microsoft.UI.Xaml.Controls;
 using System.Runtime.Intrinsics.X86;
 using MySqlX.XDevAPI;
+using Org.BouncyCastle.Asn1.X509;
 
 namespace Covoiturage
 {
@@ -73,10 +74,9 @@ namespace Covoiturage
                     Id_chauffeur = r.GetInt32("id_chauffeur"),
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
-                    Arret = r.GetString("arret"),
                     VilleArr = r.GetString("ville_arr"),
-                    HeureDep = r.GetInt32("heureDep"),
-                    HeureArr = r.GetInt32("heureArr")
+                    Arret = r.GetString("arret"),
+                    DateDepart = r.GetDateTime("dateDepart")
                 };
                 liste.Add(t);
             }
@@ -159,9 +159,7 @@ namespace Covoiturage
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
                     Arret = r.GetString("arret"),
-                    HeureArr = r.GetInt32("heureDep"),
-                    HeureDep = r.GetInt32("heureArr"),
-                    Journee = r.GetDateTime("journee"),
+                    DateDepart = r.GetDateTime("dateDepart")
 
                 };
 
@@ -198,8 +196,7 @@ namespace Covoiturage
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
                     Arret = r.GetString("arret"),
-                    HeureDep = r.GetInt32("heureDep"),
-                    HeureArr = r.GetInt32("heureArr")
+                    DateDepart = r.GetDateTime("dateDepart")
                 };
                 liste.Add(t);
             }
@@ -230,7 +227,6 @@ namespace Covoiturage
                     Adresse = r.GetString("adresse"),
                     Numero = r.GetString("no_telephone"),
                     VilleDep = r.GetString("ville_dep"),
-                    VilleArr = r.GetString("ville_arr")
                 };
                 liste.Add(c);
             }
@@ -367,11 +363,9 @@ namespace Covoiturage
                     Id_compte = r.GetInt32("id_compte"),
                     Prenom = r.GetString("prenom"),
                     Nom = r.GetString("nom"),
-                    Email = r.GetString("email"),
                     Adresse = r.GetString("adresse"),
                     Numero = r.GetString("no_telephone"),
                     VilleDep = r.GetString("ville_dep"),
-                    VilleArr = r.GetString("ville_arr")
                 };
                 r.Close();
                 con.Close();
@@ -506,20 +500,18 @@ namespace Covoiturage
         }
 
         //AJout d'un trajet 
-        public void AjoutTraj( int id_chauf, int placeDisp, string vilDep, string vilArr, int heurDep, int heurArr,string arret, string date) 
+        public void AjoutTraj( int id_chauf, int placeDisp, string villeDep, string villeArr,  string arret, DateTime dateDepart) 
         {
             MySqlCommand commande = new MySqlCommand();
             commande.Connection = con;
-            commande.CommandText = "INSERT INTO trajet (id_chauffeur,place_disp,ville_dep, ville_arr, heureDep, heureArr,arret, journee, estFini) VALUES (@id_chauf,@placeDisp,@vilDep,@vilArr,@heurDep,@heurArr,@arret,@date, 0)";
+            commande.CommandText = "INSERT INTO trajet (id_chauffeur,place_disp,ville_dep, ville_arr, arret, dateDepart, estFini) VALUES (@id_chauf,@placeDisp,@villeDep,@villeArr,@arret,@dateDepart,0)";
 
             commande.Parameters.AddWithValue("@id_chauf", id_chauf);
             commande.Parameters.AddWithValue("@placeDisp", placeDisp);
-            commande.Parameters.AddWithValue("@vilDep", vilDep);
-            commande.Parameters.AddWithValue("@vilArr", vilArr);
-            commande.Parameters.AddWithValue("@HeurDep", heurDep);
-            commande.Parameters.AddWithValue("@heurArr", heurArr);
+            commande.Parameters.AddWithValue("@villeDep", villeDep);
+            commande.Parameters.AddWithValue("@villeArr", villeArr);
             commande.Parameters.AddWithValue("@arret", arret);
-            commande.Parameters.AddWithValue("@date", date);
+            commande.Parameters.AddWithValue("@dateDepart", dateDepart);
 
 
             con.Open();
@@ -593,8 +585,8 @@ namespace Covoiturage
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
-                    HeureDep = r.GetInt32("heureDep"),
-                    HeureArr = r.GetInt32("heureArr")
+                    Arret = r.GetString("arret"),
+                    DateDepart = r.GetDateTime("dateDepart")
                 };
                 liste.Add(t);
             }
@@ -647,12 +639,12 @@ namespace Covoiturage
 
                 while (r.Read())
                 {
-                    string c = r.GetString("ville_dep");
-                    liste.Add(c);
+                    string ville = r.GetString("nom_ville");
+                    liste.Add(ville);
                 }
             r.Close();
             con.Close();
-            //ville = liste;
+
             return liste;
         }
 
@@ -736,8 +728,8 @@ namespace Covoiturage
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
-                    HeureDep = r.GetInt32("heureDep"),
-                    HeureArr = r.GetInt32("heureArr")
+                    Arret = r.GetString("arret"),
+                    DateDepart = r.GetDateTime("dateDepart")
                 };
                 liste.Add(t);
             }
@@ -768,8 +760,8 @@ namespace Covoiturage
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
-                    HeureDep = r.GetInt32("heureDep"),
-                    HeureArr = r.GetInt32("heureArr")
+                    Arret = r.GetString("arret"),
+                    DateDepart = r.GetDateTime("dateDepart")
                 };
                 liste.Add(t);
             }
@@ -802,8 +794,8 @@ namespace Covoiturage
                         PlaceDisp = r.GetInt32("place_disp"),
                         VilleDep = r.GetString("ville_dep"),
                         VilleArr = r.GetString("ville_arr"),
-                        HeureDep = r.GetInt32("heureDep"),
-                        HeureArr = r.GetInt32("heureArr")
+                        Arret = r.GetString("arret"),
+                        DateDepart = r.GetDateTime("dateDepart")
                     };
                     liste.Add(t);
                 }
@@ -835,8 +827,8 @@ namespace Covoiturage
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
-                    HeureDep = r.GetInt32("heureDep"),
-                    HeureArr = r.GetInt32("heureArr")
+                    Arret = r.GetString("arret"),
+                    DateDepart = r.GetDateTime("dateDepart")
                 };
                 liste.Add(t);
             }
@@ -868,8 +860,8 @@ namespace Covoiturage
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
-                    HeureDep = r.GetInt32("heureDep"),
-                    HeureArr = r.GetInt32("heureArr")
+                    Arret = r.GetString("arret"),
+                    DateDepart = r.GetDateTime("dateDepart")
                 };
                 liste.Add(t);
             }
@@ -901,8 +893,8 @@ namespace Covoiturage
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
-                    HeureDep = r.GetInt32("heureDep"),
-                    HeureArr = r.GetInt32("heureArr")
+                    Arret = r.GetString("arret"),
+                    DateDepart = r.GetDateTime("dateDepart")
                 };
                 liste.Add(t);
             }
@@ -933,8 +925,8 @@ namespace Covoiturage
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
-                    HeureDep = r.GetInt32("heureDep"),
-                    HeureArr = r.GetInt32("heureArr")
+                    Arret = r.GetString("arret"),
+                    DateDepart = r.GetDateTime("dateDepart")
                 };
                 liste.Add(t);
             }
@@ -965,8 +957,8 @@ namespace Covoiturage
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
-                    HeureDep = r.GetInt32("heureDep"),
-                    HeureArr = r.GetInt32("heureArr")
+                    Arret = r.GetString("arret"),
+                    DateDepart = r.GetDateTime("dateDepart")
                 };
                 liste.Add(t);
             }
@@ -997,8 +989,8 @@ namespace Covoiturage
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
-                    HeureDep = r.GetInt32("heureDep"),
-                    HeureArr = r.GetInt32("heureArr")
+                    Arret = r.GetString("arret"),
+                    DateDepart = r.GetDateTime("dateDepart")
                 };
                 liste.Add(t);
             }
@@ -1034,8 +1026,8 @@ namespace Covoiturage
                     PlaceDisp = r.GetInt32("place_disp"),
                     VilleDep = r.GetString("ville_dep"),
                     VilleArr = r.GetString("ville_arr"),
-                    HeureDep = r.GetInt32("heureDep"),
-                    HeureArr = r.GetInt32("heureArr")
+                    Arret = r.GetString("arret"),
+                    DateDepart = r.GetDateTime("dateDepart")
                 };
                 liste.Add(t);
             }

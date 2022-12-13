@@ -12,19 +12,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel>
-
         <StackPanel>
-            <TextBlock >Entrer l'heure de depart du trajet</TextBlock>
-            <TextBox x:Name="heureD" />
-        </StackPanel>
-
-        <StackPanel>
-            <TextBlock >Entrer l'heure d'arrive du trajet</TextBlock>
-            <TextBox x:Name="heureA" />
-        </StackPanel>
-
-        <StackPanel>
-            <TextBlock >Entrer le nombre de place dispo</TextBlock>
+            <TextBlock Text="Nombre de places disponibles" />
             <TextBox x:Name="place" />
         </StackPanel>
 
@@ -38,10 +27,15 @@
             <ComboBox x:Name="VilleArr" SelectionChanged="VilleArr_SelectionChanged" />
         </StackPanel>
 
-        <TextBlock Text="À quelle date voulez-vous partir? (Annemoisjour ex: 20221205)" />
-        <TextBox x:Name="journee" />
+        <StackPanel>
+            <TextBlock Text="À quelle ville faites vous un arrêt" />
+            <ComboBox x:Name="VilleArret" SelectionChanged="VilleArret_SelectionChanged" />
+        </StackPanel>
 
-        <Button x:Name="btnAjouter" Click="btnAjouter_Click" />
+        <TextBlock Text="À quelle date voulez-vous partir?" />
+        <CalendarDatePicker x:Name="calendar" DateChanged="calendar_DateChanged"/>
+
+        <Button x:Name="btnAjouter" Click="btnAjouter_Click" Content="Ajouter" />
 
     </StackPanel>
 </Page>
