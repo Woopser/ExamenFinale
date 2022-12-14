@@ -31,7 +31,7 @@ namespace Covoiturage
         public AdminAffiche()
         {
             this.InitializeComponent();
-            lvTraj.ItemsSource = GestionBD.getInstance().getSession();
+            lvTraj.ItemsSource = GestionBD.getInstance().getFacture();
             //cbDate.ItemsSource = GestionBD.getInstance().GetDates();
         }
 

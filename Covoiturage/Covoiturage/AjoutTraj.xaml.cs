@@ -73,6 +73,8 @@ namespace Covoiturage
 
 
             GestionBD.getInstance().AjoutTraj(c.Id_chauffeur, place, villeDep, villeArr, arret, dateDepart);
+            int id = GestionBD.getInstance().getTrajetFacture(c.Id_chauffeur, place, villeDep, villeArr, arret, dateDepart);
+            GestionBD.getInstance().AjoutFacture(id, 0, dateDepart);
             Frame.Navigate(typeof(MainAffiche));
         }
 
