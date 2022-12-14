@@ -103,7 +103,7 @@ namespace Covoiturage
 
         private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
-            if (ville == null)
+            if (ville == "")
             {
                 error.Text = "Vous devez choisir une ville";
                 valide = false;
