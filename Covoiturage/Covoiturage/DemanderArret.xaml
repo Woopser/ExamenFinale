@@ -17,6 +17,8 @@
                 <TextBlock Text="De quelle ville partez-vous?" />
                 <ComboBox x:Name="cbVille" SelectionChanged="cbVille_SelectionChanged" />
 
+
+        
                 <TextBlock Text="À quelle date voulez-vous partir?" />
                 <CalendarDatePicker x:Name="calendar" DateChanged="calendar_DateChanged"/>
 

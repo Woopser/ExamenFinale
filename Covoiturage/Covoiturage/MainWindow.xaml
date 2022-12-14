@@ -27,7 +27,7 @@
             <NavigationViewItemSeparator />
             
             <NavigationViewItem Content="Login" Icon="Folder" Tag="Login"  Foreground="Firebrick" />
-            <NavigationViewItem x:Name="ajVille" Visibility="Collapsed" Content="AJouter une ville" Icon="Add" Tag="Ville" Foreground="Firebrick"/>
+            <NavigationViewItem x:Name="ajVille" Visibility="Collapsed" Content="Ajouter une ville" Icon="Add" Tag="Ville" Foreground="Firebrick"/>
             
             
             <NavigationViewItemSeparator/>

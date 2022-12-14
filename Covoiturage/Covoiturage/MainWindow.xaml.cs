@@ -90,7 +90,7 @@ namespace Covoiturage
                 case "Login":
                     mainFrame.Navigate(typeof(login));
                     break;
-                case "Ville":
+                case "Ajouter une ville":
                     mainFrame.Navigate(typeof(AjoutArret));
                     break;
                 case "Vue Administrateur":

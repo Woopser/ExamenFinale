@@ -33,7 +33,7 @@ namespace Covoiturage
 
         private void btnVille_click(object sender, RoutedEventArgs e)
         {
-            //GestionBD.getInstance().Ville.Add(villeplus.Text);
+            GestionBD.getInstance().AjoutVille(villeplus.Text);
         }
     }
 }

@@ -636,6 +636,22 @@ namespace Covoiturage
             con.Close();
         }
 
+        //Ajout une ville
+        public void AjoutVille(string ville)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "INSERT INTO ville (nom_ville) VALUES (@ville)";
+
+            commande.Parameters.AddWithValue("@ville", ville);
+
+
+            con.Open();
+            commande.Prepare();
+            commande.ExecuteNonQuery();
+            con.Close();
+        }
+
         //Get un id_compte
         public int GetIdCompte(string nomU)
         {
