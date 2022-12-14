@@ -177,6 +177,7 @@ namespace Covoiturage
                     Id_facture = r.GetInt32("id_facture"),
                     Id_trajet = r.GetInt32("id_trajet"),
                     Montant = r.GetDouble("montant"),
+                    Date = r.GetDateTime("date")
                 };
                 liste.Add(t);
             }

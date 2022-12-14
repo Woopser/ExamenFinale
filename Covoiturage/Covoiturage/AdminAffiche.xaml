@@ -11,36 +11,51 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel>
+    <ScrollViewer VerticalScrollBarVisibility="Visible">
+        <StackPanel>
 
-        <!--<TextBlock Text="Quelle date voulez vous voir?" />
-        <ComboBox x:Name="cbDate" SelectionChanged="cbDate_SelectionChanged" />-->
+            <TextBlock Text="Liste des factures" FontSize="25"  Foreground="Firebrick" HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-        <ListView x:Name="lvTraj" SelectionChanged="lvTraj_SelectionChanged">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="local:Session">
-                    <Grid Margin="0,0,0,10" x:Name="grid">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+            <!--<TextBlock Text="Quelle date voulez vous voir?" />
+            <ComboBox x:Name="cbDate" SelectionChanged="cbDate_SelectionChanged" />-->
 
+            <ListView x:Name="lvTraj" SelectionChanged="lvTraj_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Facture">
+                        <Grid Margin="0,0,0,10" x:Name="grid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
+                            <StackPanel Margin="5,10,0,0" Grid.Column="0">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <TextBlock Text="Id Facture :" FontSize="20" />
+                                    <TextBlock Text="{x:Bind id_facture}" Margin="10,0,0,0" FontSize="20" />
+                                </StackPanel>
 
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="Total des revenues de la journee : "  Margin="0,0,10,0"/>
-                            <TextBlock Text="{x:Bind Total}" />
-                            <TextBlock Text="Total des profits de la journee" />
-                            <TextBlock Text="{x:Bind Profit}"  Margin="2,0,0,0"/>
-                            <TextBlock Text="Total de la partie donner aux conducteurs " />
-                            <TextBlock Text="{x:Bind Part_conducteur}"  Margin="2,0,0,0"/>
-                        </StackPanel>
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Text="Id Trajet :"  Margin="0,0,10,0"/>
+                                    <TextBlock Text="{x:Bind id_trajet}" Margin="10,0,0,0"/>
+                                </StackPanel>
 
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Text="Date :"  Margin="0,0,10,0"/>
+                                    <TextBlock Text="{x:Bind date}" Margin="10,0,0,0"/>
+                                </StackPanel>
+                            </StackPanel>
 
-                    
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackPanel>
+                            <StackPanel Orientation="Vertical"  Margin="0,10,0,10"  Grid.Column="1" >
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                                    <TextBlock Text="Montant :" FontSize="20"/>
+                                    <TextBlock Text="{x:Bind montant}"  Margin="10,0,0,0" FontSize="20"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </ScrollViewer>
 </Page>
