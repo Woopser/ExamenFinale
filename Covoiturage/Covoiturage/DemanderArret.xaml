@@ -16,14 +16,14 @@
             <TextBlock Text="De quelle ville partez-vous?" />
             <ComboBox x:Name="cbVille" SelectionChanged="cbVille_SelectionChanged" />
 
-            <!--<TextBlock Text="À quelle heure voulez-vous partir?" />
+            <TextBlock Text="À quelle heure voulez-vous partir?" />
             <ComboBox x:Name="cbHeure" SelectionChanged="cbHeure_SelectionChanged" >
                 <x:String>12:00</x:String>
                 <x:String>13:00</x:String>
                 <x:String>14:00</x:String>
                 <x:String>15:00</x:String>
                 <x:String>16:00</x:String>
-            </ComboBox>-->
+            </ComboBox>
 
             <TextBlock Text="À quelle date voulez-vous partir?" />
             <CalendarDatePicker x:Name="calendar" DateChanged="calendar_DateChanged"/>
