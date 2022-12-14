@@ -38,6 +38,30 @@ namespace Covoiturage
             
         }
 
+        //private void cbHeure_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    switch (cbHeure.SelectedItem.ToString())
+        //    {
+        //        case "12:00":
+        //            heure = 12;
+        //            break;
+        //        case "13:00":
+        //            heure = 13;
+        //            break;
+        //        case "14:00":
+        //            heure = 14;
+        //            break;
+        //        case "15:00":
+        //            heure = 15;
+        //            break;
+        //        case "16:00":
+        //            heure = 16;
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
+
         private void cbVille_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ville = cbVille.SelectedItem.ToString();
@@ -49,14 +73,30 @@ namespace Covoiturage
         {
             spTrajets.Visibility = Visibility.Visible;
 
-            if (cbVille.SelectedIndex == -1)
+            if (cbVille.SelectedIndex == -1  && date == DateTime.MinValue)
+                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajets();
+
+            else if (cbVille.SelectedIndex == -1 )
                 lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsD(date);
 
-            else if (date == DateTime.MinValue)
+            //else if (cbVille.SelectedIndex == -1 && date == DateTime.MinValue)
+            //    lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsH(heure);
+
+            else if (date == DateTime.MinValue )
                 lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsV(ville);
 
+            //else if (cbVille.SelectedIndex == -1)
+            //    lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsHD(heure, date);
+
+            //else if (cbHeure.SelectedIndex == -1)
+            //    lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVD(ville, date);
+
+            //else if (date == DateTime.MinValue)
+            //    lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVH(ville, heure);
+
             else
-            { 
+            {
+                
                 lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVD(ville, date);
             }
         }
