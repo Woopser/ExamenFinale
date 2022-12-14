@@ -38,30 +38,6 @@ namespace Covoiturage
             
         }
 
-        private void cbHeure_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            switch (cbHeure.SelectedItem.ToString())
-            {
-                case "12:00":
-                    heure = 12;
-                    break;
-                case "13:00":
-                    heure = 13;
-                    break;
-                case "14:00":
-                    heure = 14;
-                    break;
-                case "15:00":
-                    heure = 15;
-                    break;
-                case "16:00":
-                    heure = 16;
-                    break;
-                default:
-                    break;
-            }
-        }
-
         private void cbVille_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ville = cbVille.SelectedItem.ToString();
@@ -73,37 +49,21 @@ namespace Covoiturage
         {
             spTrajets.Visibility = Visibility.Visible;
 
-            if (cbVille.SelectedIndex == -1 && cbHeure.SelectedIndex == -1 && date == DateTime.MinValue)
-                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajets();
-
-            else if (cbVille.SelectedIndex == -1 && cbHeure.SelectedIndex == -1)
+            if (cbVille.SelectedIndex == -1)
                 lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsD(date);
 
-            else if (cbVille.SelectedIndex == -1 && date == DateTime.MinValue)
-                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsH(heure);
-
-            else if (date == DateTime.MinValue && cbHeure.SelectedIndex == -1)
+            else if (date == DateTime.MinValue)
                 lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsV(ville);
 
-            else if (cbVille.SelectedIndex == -1)
-                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsHD(heure, date);
-
-            else if (cbHeure.SelectedIndex == -1)
-                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVD(ville, date);
-
-            else if (date == DateTime.MinValue)
-                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVH(ville, heure);
-
             else
-            {
-                
-                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVHD(ville, heure, date);
+            { 
+                lvTrajets.ItemsSource = GestionBD.getInstance().getTrajetsVD(ville, date);
             }
         }
 
         private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
-            if(ville == null)
+            if (ville == null)
             {
                 error.Text = "Vous devez choisir une ville";
                 valide = false;
@@ -112,8 +72,27 @@ namespace Covoiturage
             if (valide)
             {
                 Trajet t = lvTrajets.SelectedItem.As<Trajet>();
-                GestionBD.getInstance().updatePlace(t.Id_trajet);//A changer comme l'autre d'en dessous, pour aller chercher l'id du trajet
+
+                GestionBD.getInstance().updatePlace(t.Id_trajet);
                 GestionBD.getInstance().AjoutArret(t.Id_trajet, c.Id_client, ville);
+
+                int id = GestionBD.getInstance().getIdfacture(t.Id_trajet);
+
+                double montant = 0;
+
+                if (GestionBD.getInstance().getVoiture(t.Id_chauffeur) == "VUS")
+                {
+                    montant = 15.00;
+                }
+
+                if (GestionBD.getInstance().getVoiture(t.Id_chauffeur) == "Berline")
+                {
+                    montant = 10.00;
+                }
+
+
+                GestionBD.getInstance().updateFacture(id, montant);
+
                 Frame.Navigate(typeof(MainAffiche));
             }
         }

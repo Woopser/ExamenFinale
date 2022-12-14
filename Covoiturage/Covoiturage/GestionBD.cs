@@ -87,6 +87,52 @@ namespace Covoiturage
             return liste;
         }
 
+        // get trajet pour ajout facture
+        public int getTrajetFacture(int id_chauffeur, int place, string villeDep, string villeArr, string arret, DateTime dateDepart)
+        {
+            Trajet t = new Trajet();
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from trajet WHERE id_chauffeur LIKE @id_chauffeur AND place_disp LIKE @place AND ville_dep LIKE @villeDep AND ville_arr LIKE @villeArr AND arret LIKE @arret AND dateDepart LIKE @dateDepart";
+
+            commande.Parameters.AddWithValue("@id_chauffeur", id_chauffeur);
+            commande.Parameters.AddWithValue("@place", place);
+            commande.Parameters.AddWithValue("@villeDep", villeDep);
+            commande.Parameters.AddWithValue("@villeArr", villeArr);
+            commande.Parameters.AddWithValue("@arret", arret);
+            commande.Parameters.AddWithValue("@dateDepart", dateDepart);
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            if (r.Read())
+            {
+                int c;
+                c = r.GetInt32("id_trajet");
+
+                r.Close();
+                con.Close();
+                return c;
+            }
+            else
+                return 0;
+        }
+
+        // update facture apres ajout arret
+        public void updateFacture(int id_facture, double montant)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "UPDATE facture SET montant = montant + @montant WHERE id_facture = @id_facture";
+
+            commande.Parameters.AddWithValue("@id_facture", id_facture);
+            commande.Parameters.AddWithValue("@montant", montant);
+
+            con.Open();
+            commande.Prepare();
+            commande.ExecuteNonQuery();
+            con.Close();
+        }
+
         //Get session
         public ObservableCollection<Session> getSession()
         {
@@ -102,10 +148,10 @@ namespace Covoiturage
                 Session t = new Session()
                 {
                     Id_journee = r.GetInt32("id_journee"),
-                    Id_facture = r.GetInt32("id_facture"),
                     Total = r.GetDouble("total"),
                     Profit = r.GetDouble("profit"),
-                    Part_conducteur = r.GetDouble("part_conducteur")
+                    Part_conducteur = r.GetDouble("part_conducteur"),
+                    Date = r.GetDateTime("date")
                 };
                 liste.Add(t);
             }
@@ -137,6 +183,30 @@ namespace Covoiturage
             r.Close();
             con.Close();
             return liste;
+        }
+
+        // get id facture
+        public int getIdfacture(int id)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select id_facture from facture where id_trajet = @id";
+
+            commande.Parameters.AddWithValue("@id", id);
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            if (r.Read())
+            {
+                int c;
+                c = r.GetInt32("id_facture");
+
+                r.Close();
+                con.Close();
+                return c;
+            }
+            else
+                return 0;
         }
 
         //get un trajet pour une facture 
@@ -383,6 +453,31 @@ namespace Covoiturage
             
         }
 
+        // get type voiture par chauffeur
+        public string getVoiture(int id)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select voiture from chauffeur where id_chauffeur = @id";
+
+            commande.Parameters.AddWithValue("@id", id);
+
+            con.Close();
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            if (r.Read())
+            {
+                string voiture;
+                voiture = r.GetString("voiture");
+
+                r.Close();
+                con.Close();
+                return voiture;
+            }
+            else
+                return "";
+        }
+
         //Chercher chauffeur par son id
         public Chauffeur getChauffeurSeul(int id)
         {
@@ -435,6 +530,23 @@ namespace Covoiturage
             commande.Parameters.AddWithValue("@typeC1", typeC);
             commande.Parameters.AddWithValue("@mdp1", mdp);
             commande.Parameters.AddWithValue("@nomU1", nomU);
+
+            con.Open();
+            commande.Prepare();
+            commande.ExecuteNonQuery();
+            con.Close();
+        }
+
+        // Ajout facture
+        public void AjoutFacture(int id_trajet, double montant, DateTime date)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "INSERT INTO facture (id_trajet,montant,date) VALUES (@id_trajet,@montant,@date)";
+
+            commande.Parameters.AddWithValue("@id_trajet", id_trajet);
+            commande.Parameters.AddWithValue("@montant", montant);
+            commande.Parameters.AddWithValue("@date", date);
 
             con.Open();
             commande.Prepare();
@@ -774,72 +886,6 @@ namespace Covoiturage
             return liste;
         }
 
-        // Demander les trajets avec ville, heure et date
-        public ObservableCollection<Trajet> getTrajetsVHD(string ville, int heure, DateTime date)
-        {
-            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
-            MySqlCommand commande = new MySqlCommand();
-            commande.Connection = con;
-            commande.CommandText = "Select * from trajet WHERE ville_Dep = @ville AND heureDep = @heure AND journee = @date";
-
-            commande.Parameters.AddWithValue("@ville", ville);
-            commande.Parameters.AddWithValue("@heure", heure);
-            commande.Parameters.AddWithValue("@date", date);
-
-            con.Open();
-                MySqlDataReader r = commande.ExecuteReader();
-                while (r.Read())
-                {
-                    Trajet t = new Trajet()
-                    {
-                        Id_trajet = r.GetInt32("id_trajet"),
-                        Id_chauffeur = r.GetInt32("id_chauffeur"),
-                        PlaceDisp = r.GetInt32("place_disp"),
-                        VilleDep = r.GetString("ville_dep"),
-                        VilleArr = r.GetString("ville_arr"),
-                        Arret = r.GetString("arret"),
-                        DateDepart = r.GetDateTime("dateDepart")
-                    };
-                    liste.Add(t);
-                }
-            r.Close();
-            con.Close();
-
-            return liste;
-        }
-
-        // Demander les trajets avec ville et heure
-        public ObservableCollection<Trajet> getTrajetsVH(string ville, int heure)
-        {
-            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
-            MySqlCommand commande = new MySqlCommand();
-            commande.Connection = con;
-            commande.CommandText = "Select * from trajet WHERE ville_Dep = @ville AND heureDep = @heure";
-
-            commande.Parameters.AddWithValue("@ville", ville);
-            commande.Parameters.AddWithValue("@heure", heure);
-
-            con.Open();
-            MySqlDataReader r = commande.ExecuteReader();
-            while (r.Read())
-            {
-                Trajet t = new Trajet()
-                {
-                    Id_trajet = r.GetInt32("id_trajet"),
-                    Id_chauffeur = r.GetInt32("id_chauffeur"),
-                    PlaceDisp = r.GetInt32("place_disp"),
-                    VilleDep = r.GetString("ville_dep"),
-                    VilleArr = r.GetString("ville_arr"),
-                    Arret = r.GetString("arret"),
-                    DateDepart = r.GetDateTime("dateDepart")
-                };
-                liste.Add(t);
-            }
-            r.Close();
-            con.Close();
-
-            return liste;
-        }
 
         // Demander les trajets avec ville et date
         public ObservableCollection<Trajet> getTrajetsVD(string ville, DateTime date)
@@ -847,42 +893,9 @@ namespace Covoiturage
             ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
             MySqlCommand commande = new MySqlCommand();
             commande.Connection = con;
-            commande.CommandText = "Select * from trajet WHERE ville_Dep = @ville AND dateDepart = @date";
+            commande.CommandText = "Select * from trajet WHERE ville_Dep = @ville AND dateDepart = @date AND estFini = 0 AND place_disp > 0";
 
             commande.Parameters.AddWithValue("@ville", ville);
-            commande.Parameters.AddWithValue("@date", date);
-
-            con.Open();
-            MySqlDataReader r = commande.ExecuteReader();
-            while (r.Read())
-            {
-                Trajet t = new Trajet()
-                {
-                    Id_trajet = r.GetInt32("id_trajet"),
-                    Id_chauffeur = r.GetInt32("id_chauffeur"),
-                    PlaceDisp = r.GetInt32("place_disp"),
-                    VilleDep = r.GetString("ville_dep"),
-                    VilleArr = r.GetString("ville_arr"),
-                    Arret = r.GetString("arret"),
-                    DateDepart = r.GetDateTime("dateDepart")
-                };
-                liste.Add(t);
-            }
-            r.Close();
-            con.Close();
-
-            return liste;
-        }
-
-        // Demander les trajets avec heure et date
-        public ObservableCollection<Trajet> getTrajetsHD(int heure, DateTime date)
-        {
-            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
-            MySqlCommand commande = new MySqlCommand();
-            commande.Connection = con;
-            commande.CommandText = "Select * from trajet WHERE heureDep = @heure AND journee = @date";
-
-            commande.Parameters.AddWithValue("@heure", heure);
             commande.Parameters.AddWithValue("@date", date);
 
             con.Open();
@@ -913,41 +926,9 @@ namespace Covoiturage
             ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
             MySqlCommand commande = new MySqlCommand();
             commande.Connection = con;
-            commande.CommandText = "Select * from trajet WHERE ville_Dep = @ville";
+            commande.CommandText = "Select * from trajet WHERE ville_Dep = @ville AND estFini = 0 AND place_disp > 0";
 
             commande.Parameters.AddWithValue("@ville", ville);
-
-            con.Open();
-            MySqlDataReader r = commande.ExecuteReader();
-            while (r.Read())
-            {
-                Trajet t = new Trajet()
-                {
-                    Id_trajet = r.GetInt32("id_trajet"),
-                    Id_chauffeur = r.GetInt32("id_chauffeur"),
-                    PlaceDisp = r.GetInt32("place_disp"),
-                    VilleDep = r.GetString("ville_dep"),
-                    VilleArr = r.GetString("ville_arr"),
-                    Arret = r.GetString("arret"),
-                    DateDepart = r.GetDateTime("dateDepart")
-                };
-                liste.Add(t);
-            }
-            r.Close();
-            con.Close();
-
-            return liste;
-        }
-
-        // Demander les trajets avec heure
-        public ObservableCollection<Trajet> getTrajetsH(int heure)
-        {
-            ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
-            MySqlCommand commande = new MySqlCommand();
-            commande.Connection = con;
-            commande.CommandText = "Select * from trajet WHERE heureDep = @heure";
-
-            commande.Parameters.AddWithValue("@heure", heure);
 
             con.Open();
             MySqlDataReader r = commande.ExecuteReader();
@@ -977,7 +958,7 @@ namespace Covoiturage
             ObservableCollection<Trajet> liste = new ObservableCollection<Trajet>();
             MySqlCommand commande = new MySqlCommand();
             commande.Connection = con;
-            commande.CommandText = "Select * from trajet WHERE dateDepart = @date";
+            commande.CommandText = "Select * from trajet WHERE dateDepart = @date AND estFini = 0 AND place_disp > 0";
 
             commande.Parameters.AddWithValue("@date", date);
 
