@@ -67,7 +67,7 @@ namespace Covoiturage
                 error.Text += " Veuillez entrer un numero de telephone. ";
                 valide = false;
             }
-            if (voiture.SelectedItem.ToString() == "")
+            if (voiture.SelectedIndex == -1)
             {
                 error.Text += " Veuillez selectionnez votre type de voiture. ";
                 valide = false;
